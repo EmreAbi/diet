@@ -134,72 +134,6 @@
     </div>
 
     <main class="flex-grow container mx-auto px-4 pt-4 pb-20 max-w-3xl">
-        <img src="nefes.png" alt="30 Günlük Yağ Yakım Planı" class="w-full h-auto mb-4 rounded-lg shadow-md" />
-        <!-- Önemli Notlar Bölümü -->
-        <section id="onemli-notlar" class="card bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-yellow-400 mb-6">
-            <div class="flex items-center mb-3">
-                <i class="fas fa-exclamation-circle text-yellow-600 text-xl mr-2"></i>
-                <h2 class="text-lg font-bold text-yellow-800">Önemli Hatırlatmalar (30 Gün Boyunca)</h2>
-            </div>
-            <ul class="list-none space-y-2 text-sm text-yellow-800">
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Alkol:</strong> Haftada <strong>maksimum 1 kadeh (150ml) şarap</strong>. Kesinlikle Long Island veya diğer şekerli kokteyller YOK. İdeal olarak 30 gün tamamen KES.</span>
-                </li>
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Öğün Bölme (Mide Küçültme):</strong> Ana öğünleri (özellikle öğle/akşam) <strong>ikiye böl</strong>. Önce proteini tüket, 1 saat sonra yan ürünleri/karbonhidratı ye.</span>
-                </li>
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Katı-Sıvı Ayrımı:</strong> Yemeklerden sonra su/sıvı içmek için <strong>en az 30 dk bekle</strong>.</span>
-                </li>
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Hidrasyon:</strong> Günde <strong>en az 2.5 - 3 Litre</strong> suyu yudum yudum iç.</span>
-                </li>
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Kafein:</strong> Günde max <strong>300 mg</strong> (yaklaşık 4-5 shot espresso). Son kahveni en geç <strong>14:00</strong>'te iç (uyku kalitesi için).</span>
-                </li>
-                <li class="flex items-start">
-                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                    <span><strong>Sodyum:</strong> Günlük <strong>≤ 2300 mg</strong> hedefle. Potasyum (yeşil yapraklılar, avokado) ve nitrat (pancar, roka) içeren besinleri artır.</span>
-                </li>
-            </ul>
-            
-            <!-- Genişletilebilir Notlar -->
-            <div class="mt-2">
-                <button id="show-more-notes" class="text-yellow-700 text-sm underline flex items-center">
-                    <i class="fas fa-plus-circle mr-1"></i> Tüm notları göster
-                </button>
-                <div id="more-notes" class="hidden mt-2">
-                    <ul class="list-none space-y-2 text-sm text-yellow-800">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                            <span><strong>Egzersiz & Tansiyon:</strong> Yoğun egzersizlerde (Güç, Kickboks, MetCon) <strong>nefesini tutma (Valsalva yapma!)</strong>. Baş dönmesi veya SBP > 180 mmHg olursa antrenmanı DURDUR.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                            <span><strong>Kan Sulandırıcı:</strong> Ani veya kolay morarma/kanama olursa doktoruna başvur. Foam roller kullanırken aşırı baskıdan kaçın (çürük riski).</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                            <span><strong>İlaçlar:</strong> Tansiyon/kan sulandırıcı ilaçlarını ve doktorunun önerdiği takviyeleri (varsa) aksatma. Kahve sonrası ilaç alımında olası hipotansiyon riskine dikkat et.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                            <span><strong>Uyku:</strong> Her gece <strong>7-9 saat</strong> kaliteli uyku hedefle.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
-                            <span><strong>Dinle Vücudunu:</strong> Porsiyonlar fazla gelirse zorlama. Açlıkta sağlıklı ara öğünleri (salatalık, havuç) veya plandaki opsiyonel öğeleri kullan.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
         <!-- Sabah Nefes ve Germe Rutini -->
         <section id="nefes-rutini" class="card bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-indigo-400 mb-6">
             <div class="flex items-center mb-3">
@@ -214,6 +148,8 @@
             </button>
             
             <div id="breath-routine-details" class="hidden mt-2">
+                <img src="nefes.png" alt="Sabah Nefes ve Germe Rutini" class="w-full h-auto mb-4 rounded-lg shadow-md" />
+                
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white rounded-lg overflow-hidden">
                         <thead class="bg-indigo-100 text-indigo-800">
@@ -1491,6 +1427,70 @@
             </section>
         </div>
 
+        <!-- Önemli Notlar Bölümü -->
+        <section id="onemli-notlar" class="card bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-yellow-400 mb-6 mt-8">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-exclamation-circle text-yellow-600 text-xl mr-2"></i>
+                <h2 class="text-lg font-bold text-yellow-800">Önemli Hatırlatmalar (30 Gün Boyunca)</h2>
+            </div>
+            <ul class="list-none space-y-2 text-sm text-yellow-800">
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Alkol:</strong> Haftada <strong>maksimum 1 kadeh (150ml) şarap</strong>. Kesinlikle Long Island veya diğer şekerli kokteyller YOK. İdeal olarak 30 gün tamamen KES.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Öğün Bölme (Mide Küçültme):</strong> Ana öğünleri (özellikle öğle/akşam) <strong>ikiye böl</strong>. Önce proteini tüket, 1 saat sonra yan ürünleri/karbonhidratı ye.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Katı-Sıvı Ayrımı:</strong> Yemeklerden sonra su/sıvı içmek için <strong>en az 30 dk bekle</strong>.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Hidrasyon:</strong> Günde <strong>en az 2.5 - 3 Litre</strong> suyu yudum yudum iç.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Kafein:</strong> Günde max <strong>300 mg</strong> (yaklaşık 4-5 shot espresso). Son kahveni en geç <strong>14:00</strong>'te iç (uyku kalitesi için).</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Sodyum:</strong> Günlük <strong>≤ 2300 mg</strong> hedefle. Potasyum (yeşil yapraklılar, avokado) ve nitrat (pancar, roka) içeren besinleri artır.</span>
+                </li>
+            </ul>
+            
+            <!-- Genişletilebilir Notlar -->
+            <div class="mt-2">
+                <button id="show-more-notes" class="text-yellow-700 text-sm underline flex items-center">
+                    <i class="fas fa-plus-circle mr-1"></i> Tüm notları göster
+                </button>
+                <div id="more-notes" class="hidden mt-2">
+                    <ul class="list-none space-y-2 text-sm text-yellow-800">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Egzersiz & Tansiyon:</strong> Yoğun egzersizlerde (Güç, Kickboks, MetCon) <strong>nefesini tutma (Valsalva yapma!)</strong>. Baş dönmesi veya SBP > 180 mmHg olursa antrenmanı DURDUR.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Kan Sulandırıcı:</strong> Ani veya kolay morarma/kanama olursa doktoruna başvur. Foam roller kullanırken aşırı baskıdan kaçın (çürük riski).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>İlaçlar:</strong> Tansiyon/kan sulandırıcı ilaçlarını ve doktorunun önerdiği takviyeleri (varsa) aksatma. Kahve sonrası ilaç alımında olası hipotansiyon riskine dikkat et.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Uyku:</strong> Her gece <strong>7-9 saat</strong> kaliteli uyku hedefle.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Dinle Vücudunu:</strong> Porsiyonlar fazla gelirse zorlama. Açlıkta sağlıklı ara öğünleri (salatalık, havuç) veya plandaki opsiyonel öğeleri kullan.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Sabit Alt Menü -->
