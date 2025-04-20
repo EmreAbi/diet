@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30 Günlük Detaylı Yağ Yakım Planı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* Temel Stiller */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card { 
+            @apply bg-white rounded-lg shadow p-4 mb-4 transition-all duration-300 hover:shadow-md; 
+        }
+        .day-button { 
+            @apply px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 flex items-center justify-center; 
+        }
+        .day-button-active { 
+            @apply bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md; 
+        }
+        .day-button-inactive { 
+            @apply bg-gray-100 text-gray-700 hover:bg-gray-200; 
+        }
+        .day-content { 
+            display: none; 
+            animation: fadeIn 0.3s ease-in;
+        }
+        .day-content.active { 
+            display: block; 
+        }
+        .meal-card {
+            @apply border-l-4 border-indigo-600 pl-3 mb-2;
+        }
+        .note { @apply text-xs text-gray-500 mt-1; }
+        .warning { @apply text-xs text-red-600 font-medium mt-1; }
+        .pros { @apply text-xs text-green-600 mt-1; }
+        
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Zaman Çizelgesi */
+        .timeline-item {
+            @apply relative pl-8 pb-4 border-l border-gray-200;
+        }
+        .timeline-dot {
+            @apply absolute left-[-8px] w-4 h-4 rounded-full bg-indigo-600 border-2 border-white;
+        }
+        .timeline-time {
+            @apply text-indigo-700 font-bold mb-1;
+        }
+        
+        /* Özel Scroll */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        /* Mobil Optimizasyonlar */
+        @media (max-width: 640px) {
+            .day-button {
+                @apply text-sm px-3 py-1.5;
+            }
+            .timeline-item {
+                @apply pl-6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Sabit Üst Menü -->
+    <header class="bg-gradient-to-r from-indigo-800 to-blue-700 text-white py-3 shadow-lg sticky top-0 z-20">
+        <div class="container mx-auto px-4">
+            <h1 class="text-center text-xl font-bold">30 Günlük Maksimum Yağ Yakım Planı</h1>
+            <p class="text-center text-sm text-indigo-100 mt-1">Kişisel Bilgiler: 48 Yaş, 177cm, 90kg (Hedef: Yağ Yakımı)</p>
+            <p class="text-center text-sm text-indigo-100">Sağlık: Hipertansiyon, Kan Sulandırıcı (Mide Küçültme Geçmişi)</p>
+        </div>
+    </header>
+
+    <!-- Gün Seçim Butonları -->
+    <nav class="bg-white shadow-md py-3 px-2 sticky top-[89px] z-10">
+        <div class="container mx-auto">
+            <div class="flex overflow-x-auto custom-scrollbar py-1 space-x-2 justify-between px-1 md:justify-center sm:px-0">
+                <button data-day="pazartesi" class="day-button day-button-active">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Pazartesi
+                </button>
+                <button data-day="sali" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Salı
+                </button>
+                <button data-day="carsamba" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Çarşamba
+                </button>
+                <button data-day="persembe" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Perşembe
+                </button>
+                <button data-day="cuma" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Cuma
+                </button>
+                <button data-day="cumartesi" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Cumartesi
+                </button>
+                <button data-day="pazar" class="day-button day-button-inactive">
+                    <i class="fas fa-calendar-day mr-1.5"></i>Pazar
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hızlı Geçiş Butonları -->
+    <div class="bg-indigo-50 py-2 px-4 border-b border-indigo-100 sticky top-[145px] z-5">
+        <div class="container mx-auto flex justify-center space-x-2">
+            <button id="btn-prev-day" class="px-3 py-1 bg-indigo-100 hover:bg-indigo-200 rounded-lg text-indigo-800 text-sm flex items-center">
+                <i class="fas fa-chevron-left mr-1"></i> Önceki
+            </button>
+            <button id="btn-next-day" class="px-3 py-1 bg-indigo-100 hover:bg-indigo-200 rounded-lg text-indigo-800 text-sm flex items-center">
+                Sonraki <i class="fas fa-chevron-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-grow container mx-auto px-4 pt-4 pb-20 max-w-3xl">
+
+        <!-- Önemli Notlar Bölümü -->
+        <section id="onemli-notlar" class="card bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-yellow-400 mb-6">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-exclamation-circle text-yellow-600 text-xl mr-2"></i>
+                <h2 class="text-lg font-bold text-yellow-800">Önemli Hatırlatmalar (30 Gün Boyunca)</h2>
+            </div>
+            <ul class="list-none space-y-2 text-sm text-yellow-800">
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Alkol:</strong> Haftada <strong>maksimum 1 kadeh (150ml) şarap</strong>. Kesinlikle Long Island veya diğer şekerli kokteyller YOK. İdeal olarak 30 gün tamamen KES.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Öğün Bölme (Mide Küçültme):</strong> Ana öğünleri (özellikle öğle/akşam) <strong>ikiye böl</strong>. Önce proteini tüket, 1 saat sonra yan ürünleri/karbonhidratı ye.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Katı-Sıvı Ayrımı:</strong> Yemeklerden sonra su/sıvı içmek için <strong>en az 30 dk bekle</strong>.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Hidrasyon:</strong> Günde <strong>en az 2.5 - 3 Litre</strong> suyu yudum yudum iç.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Kafein:</strong> Günde max <strong>300 mg</strong> (yaklaşık 4-5 shot espresso). Son kahveni en geç <strong>14:00</strong>'te iç (uyku kalitesi için).</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                    <span><strong>Sodyum:</strong> Günlük <strong>≤ 2300 mg</strong> hedefle. Potasyum (yeşil yapraklılar, avokado) ve nitrat (pancar, roka) içeren besinleri artır.</span>
+                </li>
+            </ul>
+            
+            <!-- Genişletilebilir Notlar -->
+            <div class="mt-2">
+                <button id="show-more-notes" class="text-yellow-700 text-sm underline flex items-center">
+                    <i class="fas fa-plus-circle mr-1"></i> Tüm notları göster
+                </button>
+                <div id="more-notes" class="hidden mt-2">
+                    <ul class="list-none space-y-2 text-sm text-yellow-800">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Egzersiz & Tansiyon:</strong> Yoğun egzersizlerde (Güç, Kickboks, MetCon) <strong>nefesini tutma (Valsalva yapma!)</strong>. Baş dönmesi veya SBP > 180 mmHg olursa antrenmanı DURDUR.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Kan Sulandırıcı:</strong> Ani veya kolay morarma/kanama olursa doktoruna başvur. Foam roller kullanırken aşırı baskıdan kaçın (çürük riski).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>İlaçlar:</strong> Tansiyon/kan sulandırıcı ilaçlarını ve doktorunun önerdiği takviyeleri (varsa) aksatma. Kahve sonrası ilaç alımında olası hipotansiyon riskine dikkat et.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Uyku:</strong> Her gece <strong>7-9 saat</strong> kaliteli uyku hedefle.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-2"></i>
+                            <span><strong>Dinle Vücudunu:</strong> Porsiyonlar fazla gelirse zorlama. Açlıkta sağlıklı ara öğünleri (salatalık, havuç) veya plandaki opsiyonel öğeleri kullan.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Günlük Planlar -->
+
+        <!-- Pazartesi -->
+        <div id="pazartesi" class="day-content active">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Pazartesi
+                </h2>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Güç Günü</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-dumbbell text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Tam Vücut Güç A (Squat, Bench, Row)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (180P/70F/180C)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> 8-10k</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Whey, Kreatin, Omega-3, Mg</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-heartbeat text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Kontrol:</strong> Antrenman Sonrası BP</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">06:30</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:30–09:30</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman:</strong> Tam Vücut Güç A + Egzersiz sırasında 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kas Koruma, EPOC↑</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Risk: BP Pik! Nefesi tutma!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:40</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman Sonrası:</strong> Whey (25g) + ½ muz + Kreatin (5g) (shake, 250ml su ile)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kas Onarımı</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">~10:00</div>
+                        <div class="text-sm">
+                            <p>Antrenman Sonrası BP Ölçümü</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">12:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Izgara tavuk göğsü (~100-120g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> Büyük kase çoban salata (az yağlı) + ½ bardak bulgur pilavı (isteğe bağlı) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Kompleks Karb</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Salatalık/Havuç</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Enerji?</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Uyku riskini düşün!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–17:30</div>
+                        <div class="text-sm">
+                            <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü: 50 adım + 10 calf raise) + Bu sürede 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>NEAT ↑ ~150kcal</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 1):</strong> Fırında levrek (~120-150g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Omega-3, Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 2):</strong> Zeytinyağlı/Fırınlanmış bol sebze (brokoli, kabak vb.) + 1 küçük haşlanmış patates (isteğe bağlı) + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:00</div>
+                        <div class="text-sm">
+                            <p><strong>Rahatlama:</strong> 10 dk Foam Roller (Quad, Hamstring, Sırt - Nazikçe!) + 10 dk Derin Nefes (4-2-8) + 250 ml su / Bitki çayı</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>DOMS↓, Kortizol↓</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Morarma riski</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Salı -->
+        <div id="sali" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Salı
+                </h2>
+                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Kickboks Günü</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-dumbbell text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Kickboks Teknik & Kondisyon (8x3 dk)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (180P/70F/180C)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> 8-10k</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Kreatin, Omega-3, Mg, Elektrolit</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">06:30</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:00–10:30</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman:</strong> Kickboks Teknik & Kondisyon + Egzersiz sırasında 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kardiyo, Teknik</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Risk: Eklem Zorlanması, BP Pik!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:40</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman Sonrası:</strong> Elektrolitli içecek (şekersiz) + ½ muz + Kreatin (5g) + 250ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon Takviyesi, Hızlı Enerji</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">12:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Hindi dürüm (tam tahıllı lavaş, bol hindi göğüs ~100g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Yalın Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> Dürümün yanında/sonrasında büyük kase mevsim salatası (az yağlı sos) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Kereviz sapı/Salatalık</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Enerji?</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Uyku riskini düşün!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–17:30</div>
+                        <div class="text-sm">
+                            <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü) + Bu sürede 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>NEAT ↑</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 1):</strong> Izgara köfte (yağsız kıymadan, ~120g) + 1 kase mercimek çorbası (yavaşça iç) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif, Demir</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 2):</strong> ½ bardak bulgur pilavı (isteğe bağlı) + Yanında yoğurt/cacık + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kompleks Karb, Prebiyotik</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">20:30</div>
+                        <div class="text-sm">
+                            <p><strong>Aktif Toparlanma:</strong> 15 dk Core Egzersizleri (Plank, Side Plank, Hollow Hold, Dead Bug - Nazikçe) + 5 dk Statik Esneme</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Core Gücü, Esneklik</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Çarşamba -->
+        <div id="carsamba" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Çarşamba
+                </h2>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Aktif Dinlenme</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-walking text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Aktif Dinlenme (8 km Tempolu Yürüyüş + Esneme)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (180P/70F/180C)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> ~10k (8km yürüyüşle)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Kreatin, Omega-3, Mg</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-heartbeat text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Kontrol:</strong> Sabah BP</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">06:30</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">~06:45</div>
+                        <div class="text-sm">
+                            <p>Sabah BP Ölçümü</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> Yulaf ezmesi (~40g kuru) + 2 yumurta beyazı (pişmiş, içine karıştırılmış) + 1-2 tam ceviz + ½ muz + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kompleks Karb, Protein, Sağlıklı Yağ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:00–10:30</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite:</strong> 8 km Tempolu Yürüyüş + Yürüyüş sırasında 500 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Aktif Dinlenme, Kan Dolaşımı</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:40</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite Sonrası:</strong> Yeşil çay (şekersiz) + 2-3 adet tam tahıllı kraker (isteğe bağlı) + Kreatin (5g) + 250 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Antioksidan</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">12:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Sebzeli tavuk sote (~100-120g tavuk) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Vitamin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> ½ bardak kinoa veya karabuğday + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kompleks Karb, Lif</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Salatalık</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Enerji?</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Uyku riskini düşün!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–17:30</div>
+                        <div class="text-sm">
+                            <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü) + Bu sürede 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>NEAT ↑</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 1):</strong> Izgara balık (Somon/Levrek ~120-150g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Omega-3, Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 2):</strong> Bol yeşil salata (limonlu, az zeytinyağlı) + Buharda/fırında bol sebze + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin, Mineral</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:00</div>
+                        <div class="text-sm">
+                            <p><strong>Rahatlama:</strong> 10 dk Foam Roller (Nazikçe!) + 10 dk Derin Nefes (4-2-8)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>DOMS↓, Kortizol↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:00</div>
+                        <div class="text-sm">
+                            <p>Günlük Yansıtma (2 dk not al) + 5 dk Kutu Nefes (4-4-4-4) + 250 ml su / Bitki çayı</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Farkındalık, Kortizol↓</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Mavi ışık uyarısı!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Perşembe -->
+        <div id="persembe" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Perşembe
+                </h2>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Güç Günü</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-dumbbell text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Tam Vücut Güç B (Front Squat, Incline Press)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (180P/70F/180C)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> 8-10k</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Whey, Kreatin, Omega-3, Mg</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-heartbeat text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Kontrol:</strong> Antrenman Sonrası BP</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">06:30</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> 3 yumurtalı omlet + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:30–09:30</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman:</strong> Tam Vücut Güç B + Egzersiz sırasında 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kas Koruma, EPOC↑</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Risk: BP Pik! Nefesi tutma! Pull-up zorlayıcı olabilir, asistli başla?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:40</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman Sonrası:</strong> Whey (25g) + ½ muz + Kreatin (5g) (shake, 250ml su ile)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kas Onarımı</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">~10:00</div>
+                        <div class="text-sm">
+                            <p>Antrenman Sonrası BP Ölçümü</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">12:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Izgara hindi göğsü (~100-120g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Yalın Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> Renkli salata (bol yeşillik, biber, salatalık) + ½ bardak esmer pirinç (isteğe bağlı) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin, Kompleks Karb</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Birkaç çeri domates</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Enerji?</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Uyku riskini düşün!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–17:30</div>
+                        <div class="text-sm">
+                            <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü) + Bu sürede 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>NEAT ↑</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 1):</strong> Ev yapımı mercimek köftesi (3-4 adet) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Bitkisel Protein, Lif</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 2):</strong> Zeytinyağlı/Buharda sebze (pırasa, enginar vb.) + Yanında yoğurt + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin, Prebiyotik</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:00</div>
+                        <div class="text-sm">
+                            <p><strong>Rahatlama:</strong> 10 dk Foam Roller (Nazikçe!) + 10 dk Derin Nefes (4-2-8)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>DOMS↓, Kortizol↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Cuma -->
+        <div id="cuma" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Cuma
+                </h2>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">HIIT Günü</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-fire text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> MetCon / HIIT (KB Swing EMOM + Sprint)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (180P/70F/180C)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> 8-10k</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Kreatin, BCAA, Omega-3, Mg, Elektrolit</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">06:30</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> Protein Shaker (25g Whey + Su/Badem Sütü) + 1 dilim tam tahıllı tost (üzerine avokado/fıstık ezmesi?) + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hızlı Protein</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:00–10:00</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman:</strong> MetCon / HIIT + Egzersiz sırasında 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>EPOC↑↑, Visseral Yağ↓</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Risk: Çok Yüksek BP Pik! Baş Dönmesi! Çok dikkatli ol, gerekirse yoğunluğu azalt!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:10</div>
+                        <div class="text-sm">
+                            <p><strong>Antrenman Sonrası:</strong> Elektrolitli içecek + BCAA (5g - opsiyonel) + Kreatin (5g) + 250ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon, Kas Koruma?</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">12:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Ton balıklı (suda, süzülmüş ~100g) salata + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Omega-3, Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> Salatanın kalan kısmı (bol yeşillik) + 1 dilim tam tahıllı ekmek (isteğe bağlı) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Kompleks Karb</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Salatalık/Havuç</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Enerji?</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Uyku riskini düşün!</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–17:30</div>
+                        <div class="text-sm">
+                            <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü) + Bu sürede 500 ml su (yudum yudum)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>NEAT ↑</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 1):</strong> Izgara tavuk göğsü (~120g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Yalın Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:30</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Bölüm 2):</strong> Kavrulmuş/Fırınlanmış sebzeler (renkli biber, kabak, soğan) + Az yağlı yoğurt/cacık + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin, Prebiyotik</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">20:30</div>
+                        <div class="text-sm">
+                            <p><strong>Aktif Toparlanma:</strong> 15 dk Core Egzersizleri + 5 dk Statik Esneme</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Core Gücü, Esneklik</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Cumartesi -->
+        <div id="cumartesi" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Cumartesi
+                </h2>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Uzun Yürüyüş</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-walking text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Uzun Yürüyüş / Aktif Dinlenme (12-15k Adım)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (Makrolarda biraz esnek)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> 12-15k</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Takviyeler:</strong> Kreatin, Omega-3, Mg</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:00</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">07:30</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> Avokado tost (1 dilim tam tahıl ekmek + ¼ avokado) + 2 haşlanmış yumurta + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Sağlıklı Yağ, Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:30</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:30–11:30</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite:</strong> Uzun Yürüyüş (Hedef 12-15k adımı tamamla) + Yürüyüş sırasında 500-750 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Yağ Yakımı (LISS), Zihinsel Tazelenme</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">11:40</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite Sonrası:</strong> 1 avuç mevsim meyvesi (çilek, yaban mersini vb.) + 10-15 adet çiğ badem/ceviz + Kreatin (5g) + 250ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Doğal Şeker, Sağlıklı Yağ</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">13:00</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 1):</strong> Izgara kırmızı et (dana bonfile/kontrfile ~100g) veya Tavuk But (derisiz) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Demir</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:00</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği (Bölüm 2):</strong> Bol yeşillik salatası + Az miktarda pilav/kinoa (isteğe bağlı) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Lif, Vitamin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:30</div>
+                        <div class="text-sm">
+                            <p><strong>Ara Öğün:</strong> Yeşil çay + 1 kare bitter çikolata (%70+) (isteğe bağlı)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Antioksidan, Keyif</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">16:00–17:00</div>
+                        <div class="text-sm">
+                            <p><strong>Hafif Aktivite:</strong> Esneme + Mobilite Çalışması (5-10 dk) + Bu sürede 250 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Esneklik, Hareket Açıklığı</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:00</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği (Hafif):</strong> Büyük kase sebze çorbası (kremasız, az yağlı) + Yanında peynir/yoğurt VEYA Büyük Salata (tavuklu/ton balıklı) + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Sindirimi Kolay, Hafif</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:00</div>
+                        <div class="text-sm">
+                            <p>Günlük Yansıtma (2 dk not al) + 5 dk Kutu Nefes (4-4-4-4) + 250 ml su / Bitki çayı</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Farkındalık, Kortizol↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pazar -->
+        <div id="pazar" class="day-content">
+            <div class="mb-5 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-indigo-800">
+                    <i class="fas fa-calendar-day mr-2"></i>Pazar
+                </h2>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Tam Dinlenme</span>
+            </div>
+            
+            <!-- Günün Özeti -->
+            <section class="card bg-gradient-to-r from-indigo-50 to-blue-50 mb-6">
+                <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i>Günün Hedefleri
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-bed text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Egzersiz:</strong> Tam Dinlenme / Hazırlık</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tasks text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Aktivite:</strong> İlerleme ölçümü, Haftalık Değerlendirme, Meal Prep</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-utensils text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Beslenme:</strong> ~2000 kcal (Rahat gün)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-tint text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Su Hedefi:</strong> 2.5 - 3 Litre</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shoe-prints text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Adım Hedefi:</strong> Hafif (5-7k)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-heartbeat text-indigo-600 mr-2 w-6 text-center"></i>
+                        <span class="text-sm"><strong>Kontrol:</strong> Sabah BP & INR, Haftalık Ölçüm</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Zaman Çizelgesi -->
+            <h3 class="text-lg font-bold mb-3 text-indigo-800 flex items-center">
+                <i class="fas fa-clock mr-2"></i>Günlük Program
+            </h3>
+            
+            <section class="card mb-6">
+                <div class="pl-1 space-y-1">
+                    <!-- Sabah Rutini -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:00</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">08:30</div>
+                        <div class="text-sm">
+                            <p><strong>Kontrol:</strong> Haftalık İlerleme Ölçümü (Kilo, Bel Çevresi, Fotoğraf?)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Takip, Motivasyon</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:00</div>
+                        <div class="text-sm">
+                            <p><strong>Kontrol:</strong> Sabah BP & INR Ölçümü + İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Sağlık Takibi, BP Kontrolü</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">09:30</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> Menemen (3 yumurta) + 1 dilim tam tahıllı ekmek + Zeytin/Peynir</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Keyif</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">11:00–13:00</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite:</strong> Haftalık Meal Prep (Önümüzdeki 2-3 gün için öğle/akşam yemekleri hazırlığı - Tavuk/Hindi haşlama/ızgara, sebze hazırlama, bakliyat haşlama vb.) + Bu sürede 500 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Planlama, Zaman Kazanma</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Öğle Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">14:00</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Öğle Yemeği:</strong> Hazırlanan yemeklerden biri (örn: Haşlanmış tavuk + salata + yoğurt) + Kreatin (5g) + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Dengeli Makro</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00–16:00</div>
+                        <div class="text-sm">
+                            <p><strong>Aktivite:</strong> Haftalık Değerlendirme (Geçen haftanın analizi, gelecek haftanın planı/hedefleri)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Öz Farkındalık, İyileştirme</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">16:00–18:00</div>
+                        <div class="text-sm">
+                            <p><strong>Serbest Zaman / Sosyal Aktivite</strong> (Aile/Arkadaş) + Bu sürede 500 ml su</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Stres Azaltma</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Akşam Yemeği -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:00</div>
+                        <div class="text-sm meal-card">
+                            <p><strong>Akşam Yemeği:</strong> Hazırlanan yemeklerden protein ağırlıklı bir porsiyon (örn: Izgara hindi + fırın sebze) + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Kas Onarımı</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:00</div>
+                        <div class="text-sm">
+                            <p><strong>Rahatlama:</strong> 10 dk Yatıştırıcı Yoga/Esneme + 10 dk Derin Nefes + 250 ml su / Bitki çayı</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Gevşeme, Kortizol↓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:00</div>
+                        <div class="text-sm">
+                            <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Sabit Alt Menü -->
+    <footer class="bg-indigo-800 text-white py-4 px-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">Kişiselleştirilmiş Yağ Yakım Planı © 2024</p>
+            <p class="text-xs text-indigo-200 mt-1">48 Yaş, 177cm, 90kg - Hipertansiyon, Kan Sulandırıcı (Mide Küçültme Geçmişi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gün geçişlerini yönet
+        const buttons = document.querySelectorAll('.day-button');
+        const contents = document.querySelectorAll('.day-content');
+        const prevDayBtn = document.getElementById('btn-prev-day');
+        const nextDayBtn = document.getElementById('btn-next-day');
+        const days = ['pazartesi', 'sali', 'carsamba', 'persembe', 'cuma', 'cumartesi', 'pazar'];
+        
+        // Aktif günü belirle
+        let activeDay = 'pazartesi';
+        
+        // Buton tıklamaları
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Buton stillerini güncelle
+                buttons.forEach(btn => {
+                    btn.classList.remove('day-button-active');
+                    btn.classList.add('day-button-inactive');
+                });
+                button.classList.remove('day-button-inactive');
+                button.classList.add('day-button-active');
+                
+                // İçerikleri güncelle
+                const targetDay = button.getAttribute('data-day');
+                activeDay = targetDay;
+                
+                contents.forEach(content => {
+                    if (content.id === targetDay) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Sayfayı yukarı kaydır (smooth scroll)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+        
+        // Önceki gün butonu
+        prevDayBtn.addEventListener('click', () => {
+            const currentIndex = days.indexOf(activeDay);
+            const prevIndex = (currentIndex - 1 + days.length) % days.length;
+            const prevDay = days[prevIndex];
+            const prevButton = document.querySelector(`[data-day="${prevDay}"]`);
+            prevButton.click();
+        });
+        
+        // Sonraki gün butonu
+        nextDayBtn.addEventListener('click', () => {
+            const currentIndex = days.indexOf(activeDay);
+            const nextIndex = (currentIndex + 1) % days.length;
+            const nextDay = days[nextIndex];
+            const nextButton = document.querySelector(`[data-day="${nextDay}"]`);
+            nextButton.click();
+        });
+        
+        // Genişletilebilir notlar
+        const showMoreBtn = document.getElementById('show-more-notes');
+        const moreNotes = document.getElementById('more-notes');
+        
+        showMoreBtn.addEventListener('click', () => {
+            if (moreNotes.classList.contains('hidden')) {
+                moreNotes.classList.remove('hidden');
+                showMoreBtn.innerHTML = '<i class="fas fa-minus-circle mr-1"></i> Daha az göster';
+            } else {
+                moreNotes.classList.add('hidden');
+                showMoreBtn.innerHTML = '<i class="fas fa-plus-circle mr-1"></i> Tüm notları göster';
+            }
+        });
+    </script>
+</body>
+</html>
