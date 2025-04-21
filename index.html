@@ -101,6 +101,21 @@
             display: flex;
             align-items: center;
             margin-bottom: 5px;
+            position: relative;
+        }
+        
+        /* Saatlerin checkbox'ın üzerine binmesini engellemek için */
+        .timeline-time span {
+            margin-left: 30px;
+            display: inline-block;
+        }
+        
+        /* Checkbox hizalaması için */
+        .timeline-time input[type="checkbox"] {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            margin-top: 0;
         }
         
         .task-completed .text-sm p {
@@ -130,6 +145,62 @@
             }
             .timeline-item {
                 @apply pl-6;
+                padding-left: 30px; /* Daha az padding */
+            }
+            .task-checkbox {
+                left: -25px;
+            }
+            .timeline-item > .task-checkbox {
+                left: -20px;
+            }
+            .timeline-time {
+                padding-left: 30px;
+            }
+        }
+        
+        /* Çok küçük ekranlar için ek düzeltmeler */
+        @media (max-width: 480px) {
+            .task-checkbox {
+                left: -22px;
+            }
+            .timeline-item > .task-checkbox {
+                left: -17px;
+            }
+            .timeline-time {
+                padding-left: 25px;
+            }
+        }
+        
+        /* Ekstra küçük ekranlar için özel düzenleme */
+        @media (max-width: 380px) {
+            .task-checkbox {
+                left: -18px;
+            }
+            .timeline-item > .task-checkbox {
+                left: -15px;
+            }
+            .timeline-time {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Ekstra küçük ekranlar için özel düzenleme */
+        @media (max-width: 380px) {
+            .task-checkbox {
+                left: -18px;
+            }
+            .timeline-item > .task-checkbox {
+                left: -15px;
+            }
+            .timeline-time span {
+                margin-left: 35px;
+            }
+        }
+        
+        /* Çok dar ekranlar için */
+        @media (max-width: 320px) {
+            .timeline-time span {
+                margin-left: 40px;
             }
         }
         
