@@ -52,6 +52,59 @@
         }
         .timeline-time {
             @apply text-indigo-700 font-bold mb-1;
+            position: relative;
+        }
+        
+        /* Checkbox stil */
+        .task-checkbox {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #818cf8;
+            border-radius: 6px;
+            background-color: white;
+            display: inline-block;
+            position: absolute;
+            left: -40px;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: all 0.2s ease;
+            margin-top: 0;
+            appearance: none;
+            z-index: 10;
+        }
+        
+        /* Timeline item içindeki direkt checkbox'lar için düzeltme */
+        .timeline-item > .task-checkbox {
+            left: -35px; 
+            top: 10px;
+        }
+        
+        .task-checkbox:checked {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        
+        .task-checkbox:checked::after {
+            content: "✓";
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Timeline time with checkbox */
+        .timeline-time {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .task-completed .text-sm p {
+            @apply text-gray-400 line-through;
         }
         
         /* Özel Scroll */
@@ -78,6 +131,11 @@
             .timeline-item {
                 @apply pl-6;
             }
+        }
+        
+        .task-checkbox:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -270,35 +328,51 @@
                     <!-- Sabah Rutini -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-time">06:30</div>
-                        <div class="text-sm">
-                            <p>500 ml su + 5 dk nefes/hafif germe</p>
-                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        <div>
+                            <div class="timeline-time">
+                                <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="06:30" id="pazartesi-0630">
+                                <span>06:30</span>
+                            </div>
+                            <div class="text-sm">
+                                <p>500 ml su + 5 dk nefes/hafif germe</p>
+                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-time">07:00</div>
-                        <div class="text-sm">
-                            <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
-                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
-                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        <div>
+                            <div class="timeline-time">
+                                <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="07:00" id="pazartesi-0700">
+                                <span>07:00</span>
+                            </div>
+                            <div class="text-sm">
+                                <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
+                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
+                                <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-time">08:00</div>
-                        <div class="text-sm">
-                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
-                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
-                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                        <div>
+                            <div class="timeline-time">
+                                <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="08:00" id="pazartesi-0800">
+                                <span>08:00</span>
+                            </div>
+                            <div class="text-sm">
+                                <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                                <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="08:30" id="pazartesi-0830">
                         <div class="timeline-time">08:30–09:30</div>
                         <div class="text-sm">
                             <p><strong>Antrenman:</strong> Tam Vücut Güç A + Egzersiz sırasında 500 ml su (yudum yudum)</p>
@@ -309,6 +383,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="09:40" id="pazartesi-0940">
                         <div class="timeline-time">09:40</div>
                         <div class="text-sm">
                             <p><strong>Antrenman Sonrası:</strong> Whey (25g) + ½ muz + Kreatin (5g) (shake, 250ml su ile)</p>
@@ -318,6 +393,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="10:00" id="pazartesi-1000">
                         <div class="timeline-time">~10:00</div>
                         <div class="text-sm">
                             <p>Antrenman Sonrası BP Ölçümü</p>
@@ -327,6 +403,7 @@
                     <!-- Öğle Yemeği -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="12:30" id="pazartesi-1230">
                         <div class="timeline-time">12:30</div>
                         <div class="text-sm meal-card">
                             <p><strong>Öğle Yemeği (Bölüm 1):</strong> Izgara tavuk göğsü (~100-120g) + 250 ml su (yemekten 30dk sonra)</p>
@@ -336,6 +413,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="13:30" id="pazartesi-1330">
                         <div class="timeline-time">13:30</div>
                         <div class="text-sm meal-card">
                             <p><strong>Öğle Yemeği (Bölüm 2):</strong> Büyük kase çoban salata (az yağlı) + ½ bardak bulgur pilavı (isteğe bağlı) + 250 ml su (yemekten 30dk sonra)</p>
@@ -345,6 +423,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="14:30" id="pazartesi-1430">
                         <div class="timeline-time">14:30</div>
                         <div class="text-sm">
                             <p><strong>Ara Öğün:</strong> Espresso (2/4 - Opsiyonel, SON!) + Salatalık/Havuç</p>
@@ -355,6 +434,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="15:00" id="pazartesi-1500">
                         <div class="timeline-time">15:00–17:30</div>
                         <div class="text-sm">
                             <p>Pomodoro Çalışma (Her 25dk'da 3dk ayakta/yürü: 50 adım + 10 calf raise) + Bu sürede 500 ml su (yudum yudum)</p>
@@ -365,6 +445,7 @@
                     <!-- Akşam Yemeği -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="18:30" id="pazartesi-1830">
                         <div class="timeline-time">18:30</div>
                         <div class="text-sm meal-card">
                             <p><strong>Akşam Yemeği (Bölüm 1):</strong> Fırında levrek (~120-150g) + 250 ml su (yemekten 30dk sonra)</p>
@@ -374,6 +455,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="19:30" id="pazartesi-1930">
                         <div class="timeline-time">19:30</div>
                         <div class="text-sm meal-card">
                             <p><strong>Akşam Yemeği (Bölüm 2):</strong> Zeytinyağlı/Fırınlanmış bol sebze (brokoli, kabak vb.) + 1 küçük haşlanmış patates (isteğe bağlı) + Omega-3 (2g) & Mg (400mg) takviyeleri + 250 ml su (yemekten 30dk sonra)</p>
@@ -383,6 +465,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="21:00" id="pazartesi-2100">
                         <div class="timeline-time">21:00</div>
                         <div class="text-sm">
                             <p><strong>Rahatlama:</strong> 10 dk Foam Roller (Quad, Hamstring, Sırt - Nazikçe!) + 10 dk Derin Nefes (4-2-8) + 250 ml su / Bitki çayı</p>
@@ -393,6 +476,7 @@
                     
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="22:30" id="pazartesi-2230">
                         <div class="timeline-time">22:30</div>
                         <div class="text-sm">
                             <p>Uyku Hazırlığı (Hedef 7-9 saat)</p>
@@ -748,7 +832,6 @@
                         <div class="text-sm">
                             <p>Günlük Yansıtma (2 dk not al) + 5 dk Kutu Nefes (4-4-4-4) + 250 ml su / Bitki çayı</p>
                             <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Farkındalık, Kortizol↓</div>
-                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Mavi ışık uyarısı!</div>
                         </div>
                     </div>
                     
@@ -1490,6 +1573,13 @@
                     </ul>
                 </div>
             </div>
+            
+            <!-- Görevleri Sıfırlama Butonu -->
+            <div class="mt-4 flex justify-center">
+                <button onclick="resetAllTasks()" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-redo-alt mr-1"></i> Tüm İşaretlenen Görevleri Sıfırla
+                </button>
+            </div>
         </section>
     </main>
 
@@ -1585,6 +1675,141 @@
                 showBreathRoutineBtn.innerHTML = '<i class="fas fa-expand-alt mr-1"></i> Detaylı Rutini Göster';
             }
         });
+    </script>
+    
+    <!-- Checkbox işlevselliği için script -->
+    <script>
+        // Sayfa yüklendiğinde çalış
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tüm timeline-item öğelerini seç ve düzelt
+            fixCheckboxStructure();
+            
+            // Tüm task checkboxlarını seç
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            
+            // Kaydedilmiş durumları yükle
+            loadTaskStates();
+            
+            // Her checkbox için event listener ekle
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Checkbox değiştiğinde localStorage'a kaydet
+                    const day = this.getAttribute('data-day');
+                    const time = this.getAttribute('data-time');
+                    const isChecked = this.checked;
+                    
+                    // Değişikliği kaydet
+                    saveTaskState(day, time, isChecked);
+                    
+                    // Görünümü güncelle
+                    const timelineItem = this.closest('.timeline-item');
+                    if (isChecked) {
+                        timelineItem.classList.add('task-completed');
+                    } else {
+                        timelineItem.classList.remove('task-completed');
+                    }
+                });
+            });
+        });
+        
+        // Tüm timeline-item yapısını düzeltme
+        function fixCheckboxStructure() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach(item => {
+                const checkbox = item.querySelector('.task-checkbox');
+                const timeElement = item.querySelector('.timeline-time');
+                
+                // Eğer checkbox timeline-item'ın direkt child'ı ise
+                if (checkbox && checkbox.parentNode === item) {
+                    // Zaman içeriğini al
+                    const timeText = timeElement.textContent;
+                    
+                    // Wrapper div oluştur
+                    const wrapper = document.createElement('div');
+                    
+                    // Zaman elementini wrapper'a taşı
+                    wrapper.appendChild(checkbox);
+                    
+                    // Zaman içeriğini span olarak ekle
+                    const span = document.createElement('span');
+                    span.textContent = timeText;
+                    timeElement.innerHTML = '';
+                    timeElement.appendChild(checkbox);
+                    timeElement.appendChild(span);
+                    
+                    // Eğer wrapper.timelineTime yoksa yeni bir yapı oluştur
+                    if (!item.querySelector('div > .timeline-time')) {
+                        const outerWrapper = document.createElement('div');
+                        item.insertBefore(outerWrapper, timeElement);
+                        outerWrapper.appendChild(timeElement);
+                        
+                        // Text elementi taşı
+                        const textElement = item.querySelector('.text-sm');
+                        if (textElement) {
+                            outerWrapper.appendChild(textElement);
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Görev durumunu localStorage'a kaydet
+        function saveTaskState(day, time, isChecked) {
+            // Mevcut durumları al
+            let taskStates = JSON.parse(localStorage.getItem('dietTaskStates')) || {};
+            
+            // Gün yoksa oluştur
+            if (!taskStates[day]) {
+                taskStates[day] = {};
+            }
+            
+            // Değeri kaydet
+            taskStates[day][time] = isChecked;
+            
+            // localStorage'a geri yaz
+            localStorage.setItem('dietTaskStates', JSON.stringify(taskStates));
+        }
+        
+        // Görev durumlarını localStorage'dan yükle
+        function loadTaskStates() {
+            const taskStates = JSON.parse(localStorage.getItem('dietTaskStates')) || {};
+            
+            // Tüm günler için
+            Object.keys(taskStates).forEach(day => {
+                // Her gündeki zamanlar için
+                Object.keys(taskStates[day]).forEach(time => {
+                    // Checkbox ID'sini oluştur
+                    const checkboxId = `${day}-${time.replace(':', '')}`;
+                    const checkbox = document.getElementById(checkboxId);
+                    
+                    // Checkbox varsa durumunu ayarla
+                    if (checkbox) {
+                        checkbox.checked = taskStates[day][time];
+                        
+                        // Görünümü güncelle
+                        const timelineItem = checkbox.closest('.timeline-item');
+                        if (taskStates[day][time]) {
+                            timelineItem.classList.add('task-completed');
+                        } else {
+                            timelineItem.classList.remove('task-completed');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Tüm görevleri sıfırlama fonksiyonu
+        function resetAllTasks() {
+            if (confirm('Tüm işaretlenmiş görevler sıfırlanacak. Emin misiniz?')) {
+                localStorage.removeItem('dietTaskStates');
+                document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+                    checkbox.checked = false;
+                    const timelineItem = checkbox.closest('.timeline-item');
+                    timelineItem.classList.remove('task-completed');
+                });
+            }
+        }
     </script>
 </body>
 </html>
