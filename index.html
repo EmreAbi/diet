@@ -216,8 +216,6 @@
     <header class="bg-gradient-to-r from-indigo-800 to-blue-700 text-white py-3 shadow-lg sticky top-0 z-20">
         <div class="container mx-auto px-4">
             <h1 class="text-center text-xl font-bold">30 Günlük Maksimum Yağ Yakım Planı</h1>
-            <p class="text-center text-sm text-indigo-100 mt-1">Kişisel Bilgiler: 48 Yaş, 177cm, 90kg (Hedef: Yağ Yakımı)</p>
-            <p class="text-center text-sm text-indigo-100">Sağlık: Hipertansiyon, Kan Sulandırıcı (Mide Küçültme Geçmişi)</p>
         </div>
     </header>
 
@@ -274,7 +272,7 @@
             
             <button id="show-breath-routine" class="mb-3 px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-800 rounded-lg text-sm flex items-center mx-auto">
                 <i class="fas fa-expand-alt mr-1"></i> Detaylı Rutini Göster
-            </button>
+                </button>
             
             <div id="breath-routine-details" class="hidden mt-2">
                 <img src="nefes.png" alt="Sabah Nefes ve Germe Rutini" class="w-full h-auto mb-4 rounded-lg shadow-md" />
@@ -331,7 +329,7 @@
                             <li>Egzersizleri yavaş ve kontrollü yap, asla acele etme.</li>
                             <li>Tüm rutini 1 haftalık alışma süresi sonrası 5 dakikadan kısa sürede tamamlayabileceksin.</li>
                             <li>Ağrı hissedersen o hareketi atla veya nazikçe yap.</li>
-                        </ul>
+                    </ul>
                     </div>
                     <div class="bg-green-50 rounded-lg p-3 text-xs text-green-800 flex-1 min-w-[280px]">
                         <p class="font-medium mb-1"><i class="fas fa-heart mr-1"></i> Faydaları:</p>
@@ -404,9 +402,9 @@
                                 <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="06:30" id="pazartesi-0630">
                                 <span>06:30</span>
                             </div>
-                            <div class="text-sm">
-                                <p>500 ml su + 5 dk nefes/hafif germe</p>
-                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
+                        <div class="text-sm">
+                            <p>500 ml su + 5 dk nefes/hafif germe</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Hidrasyon</div>
                             </div>
                         </div>
                     </div>
@@ -418,10 +416,10 @@
                                 <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="07:00" id="pazartesi-0700">
                                 <span>07:00</span>
                             </div>
-                            <div class="text-sm">
-                                <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
-                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
-                                <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
+                        <div class="text-sm">
+                            <p><strong>Kahvaltı:</strong> 3 yumurtalı menemen + yeşillik + 1 dilim tam tahıl ekmek + Espresso (1/4)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>Protein, Lif</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kafein SBP ↑</div>
                             </div>
                         </div>
                     </div>
@@ -433,10 +431,10 @@
                                 <input type="checkbox" class="task-checkbox" data-day="pazartesi" data-time="08:00" id="pazartesi-0800">
                                 <span>08:00</span>
                             </div>
-                            <div class="text-sm">
-                                <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
-                                <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
-                                <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
+                        <div class="text-sm">
+                            <p>İlaçlar (Antihipertansif & Antikoagülan) + 250 ml su (ilaçtan 30dk sonra)</p>
+                            <div class="pros"><i class="fas fa-plus-circle mr-1"></i>BP Kontrolü</div>
+                            <div class="warning"><i class="fas fa-exclamation-triangle mr-1"></i>Dikkat: Kahve sonrası ilaç -> hipotansiyon riski</div>
                             </div>
                         </div>
                     </div>
@@ -1658,7 +1656,6 @@
     <footer class="bg-indigo-800 text-white py-4 px-4">
         <div class="container mx-auto text-center">
             <p class="text-sm">Kişiselleştirilmiş Yağ Yakım Planı © 2024</p>
-            <p class="text-xs text-indigo-200 mt-1">48 Yaş, 177cm, 90kg - Hipertansiyon, Kan Sulandırıcı (Mide Küçültme Geçmişi)</p>
         </div>
     </footer>
 
@@ -1755,70 +1752,120 @@
             // Tüm timeline-item öğelerini seç ve düzelt
             fixCheckboxStructure();
             
-            // Tüm task checkboxlarını seç
-            const checkboxes = document.querySelectorAll('.task-checkbox');
-            
             // Kaydedilmiş durumları yükle
             loadTaskStates();
             
+            // Tüm checkbox'lara event listener ekle
+            setupCheckboxEventListeners();
+        });
+        
+        // Checkbox'lara event listener ekle
+        function setupCheckboxEventListeners() {
+            // Tüm task checkboxlarını seç
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            
             // Her checkbox için event listener ekle
             checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    // Checkbox değiştiğinde localStorage'a kaydet
-                    const day = this.getAttribute('data-day');
-                    const time = this.getAttribute('data-time');
-                    const isChecked = this.checked;
-                    
-                    // Değişikliği kaydet
-                    saveTaskState(day, time, isChecked);
-                    
-                    // Görünümü güncelle
-                    const timelineItem = this.closest('.timeline-item');
-                    if (isChecked) {
-                        timelineItem.classList.add('task-completed');
-                    } else {
-                        timelineItem.classList.remove('task-completed');
-                    }
-                });
+                // Önce eski event listener'ları kaldır (varsa)
+                checkbox.removeEventListener('change', checkboxChangeHandler);
+                
+                // Yeni event listener ekle
+                checkbox.addEventListener('change', checkboxChangeHandler);
             });
-        });
+        }
+        
+        // Checkbox değişim işleyicisi
+        function checkboxChangeHandler() {
+            // Checkbox değiştiğinde localStorage'a kaydet
+            const day = this.getAttribute('data-day');
+            const time = this.getAttribute('data-time');
+            const isChecked = this.checked;
+            
+            // Değişikliği kaydet
+            saveTaskState(day, time, isChecked);
+            
+            // Görünümü güncelle
+            const timelineItem = this.closest('.timeline-item');
+            if (isChecked) {
+                timelineItem.classList.add('task-completed');
+            } else {
+                timelineItem.classList.remove('task-completed');
+            }
+        }
         
         // Tüm timeline-item yapısını düzeltme
         function fixCheckboxStructure() {
             const timelineItems = document.querySelectorAll('.timeline-item');
             
             timelineItems.forEach(item => {
-                const checkbox = item.querySelector('.task-checkbox');
+                // İlgili elementleri seç
                 const timeElement = item.querySelector('.timeline-time');
+                let checkbox = item.querySelector('.task-checkbox');
                 
-                // Eğer checkbox timeline-item'ın direkt child'ı ise
-                if (checkbox && checkbox.parentNode === item) {
-                    // Zaman içeriğini al
-                    const timeText = timeElement.textContent;
-                    
-                    // Wrapper div oluştur
-                    const wrapper = document.createElement('div');
-                    
-                    // Zaman elementini wrapper'a taşı
-                    wrapper.appendChild(checkbox);
-                    
-                    // Zaman içeriğini span olarak ekle
-                    const span = document.createElement('span');
-                    span.textContent = timeText;
-                    timeElement.innerHTML = '';
-                    timeElement.appendChild(checkbox);
-                    timeElement.appendChild(span);
-                    
-                    // Eğer wrapper.timelineTime yoksa yeni bir yapı oluştur
-                    if (!item.querySelector('div > .timeline-time')) {
-                        const outerWrapper = document.createElement('div');
-                        item.insertBefore(outerWrapper, timeElement);
-                        outerWrapper.appendChild(timeElement);
+                // Günü tespit et
+                const dayContent = item.closest('.day-content');
+                const day = dayContent ? dayContent.id : 'pazartesi';
+                
+                // Zaman bilgisini al
+                const timeText = timeElement ? timeElement.textContent.trim() : '';
+                let timeValue = timeText.split('–')[0].replace('~', '').trim();
+                
+                if (timeElement) {
+                    // 1. DURUM: Checkbox yok, oluşturulması gerekiyor
+                    if (!checkbox) {
+                        // Yeni checkbox oluştur
+                        checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'task-checkbox';
+                        checkbox.setAttribute('data-day', day);
+                        checkbox.setAttribute('data-time', timeValue);
                         
-                        // Text elementi taşı
-                        const textElement = item.querySelector('.text-sm');
-                        if (textElement) {
-                            outerWrapper.appendChild(textElement);
+                        // Saat formatına göre ID oluştur
+                        const formattedTime = timeValue.replace(':', '');
+                        checkbox.id = `${day}-${formattedTime}`;
+                        
+                        // timeElement içinde span yapısını oluştur
+                        if (timeElement.tagName === 'DIV') {
+                            // Önce içeriği temizle
+                            const timeContent = timeElement.textContent;
+                            timeElement.innerHTML = '';
+                            
+                            // Checkbox ekle
+                            timeElement.appendChild(checkbox);
+                            
+                            // Span ekle
+                            const span = document.createElement('span');
+                            span.textContent = timeContent;
+                            timeElement.appendChild(span);
+                        }
+                    }
+                    // 2. DURUM: Checkbox var, ama timeline-item içinde direkt (yanlış konum)
+                    else if (checkbox.parentNode === item) {
+                        // Zaman içeriğini al
+                        const timeContent = timeElement.textContent;
+                        
+                        // Zaman elementini temizle
+                        timeElement.innerHTML = '';
+                        
+                        // Checkbox'ı taşı
+                        timeElement.appendChild(checkbox);
+                        
+                        // Span ekle
+                        const span = document.createElement('span');
+                        span.textContent = timeContent;
+                        timeElement.appendChild(span);
+                        
+                        // Eğer wrapper.timelineTime yoksa yeni bir yapı oluştur
+                        if (!item.querySelector('div > .timeline-time')) {
+                            const outerWrapper = document.createElement('div');
+                            item.insertBefore(outerWrapper, timeElement);
+                            outerWrapper.appendChild(timeElement);
+                            
+                            // Text elementi taşı
+                            const textElement = item.querySelector('.text-sm');
+                            if (textElement) {
+                                outerWrapper.appendChild(textElement);
+                            }
                         }
                     }
                 }
@@ -1874,11 +1921,19 @@
         function resetAllTasks() {
             if (confirm('Tüm işaretlenmiş görevler sıfırlanacak. Emin misiniz?')) {
                 localStorage.removeItem('dietTaskStates');
+                
+                // Tüm checkboxları işaretsiz yap
                 document.querySelectorAll('.task-checkbox').forEach(checkbox => {
                     checkbox.checked = false;
-                    const timelineItem = checkbox.closest('.timeline-item');
-                    timelineItem.classList.remove('task-completed');
                 });
+                
+                // Tüm timeline-item'lardan completed sınıfını kaldır
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    item.classList.remove('task-completed');
+                });
+                
+                // Sayfayı yenile (opsiyonel)
+                location.reload();
             }
         }
     </script>
