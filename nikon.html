@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikon Z6 II - Yeni Başlayanlar İçin Kapsamlı Rehber</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            background-color: #4F46E5; 
+            color: white;
+            font-weight: 600;
+        }
+        .camera-diagram {
+            position: relative;
+            margin: 20px auto;
+            display: inline-block; 
+        }
+        .camera-diagram img, .feature-image {
+            height: auto;
+            border-radius: 0.375rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            display: block; 
+        }
+        .hotspot {
+            position: absolute;
+            width: 28px; 
+            height: 28px; 
+            background-color: rgba(239, 68, 68, 0.75); 
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem; 
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            border: 2px solid white;
+            box-shadow: 0 0 8px rgba(0,0,0,0.4);
+        }
+        .hotspot:hover {
+            transform: scale(1.25);
+            background-color: rgba(220, 38, 38, 0.9); 
+        }
+        .hotspot-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 130%; 
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1F2937; 
+            color: #F3F4F6; 
+            padding: 10px 15px;
+            border-radius: 8px;
+            z-index: 20; 
+            width: max-content; 
+            min-width: 200px; 
+            max-width: 300px; 
+            text-align: left;
+            font-size: 0.875rem; 
+            line-height: 1.4;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none; 
+        }
+        .hotspot:hover .hotspot-tooltip {
+            display: block;
+        }
+        .step {
+            border-left: 4px solid #4F46E5; 
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+        .step h4 { margin-bottom: 10px; }
+        .step ul { margin-top: 8px; }
+
+        .nav-link[href="#introduction"].active-initial {
+            background-color: #4F46E5;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-72 bg-gray-800 text-gray-200 p-6 space-y-3 flex-shrink-0 shadow-lg">
+            <h1 class="text-3xl font-bold mb-2 text-center text-indigo-400">Nikon Z6 II</h1>
+            <p class="text-sm text-gray-400 mb-8 text-center -mt-1">Yeni Başlayan Rehberi</p>
+            <nav class="space-y-1">
+                <a href="#introduction" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Giriş ve Hazırlık</a>
+                <a href="#camera-tour-top" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Kamera Turu: Üst Panel</a>
+                <a href="#camera-tour-back" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Kamera Turu: Arka Panel</a>
+                <a href="#camera-tour-front-sides" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Kamera Turu: Ön ve Yanlar</a>
+                <a href="#shooting-modes" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Çekim Modları</a>
+                <a href="#basic-settings" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Temel Ayarlar (Pozlama Üçgeni)</a>
+                <a href="#focusing" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Netleme (Odaklama)</a>
+                <a href="#white-balance" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Beyaz Dengesi (WB)</a>
+                <a href="#metering" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Pozlama Ölçümü</a>
+                <a href="#image-quality" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Görüntü Kalitesi (RAW/JPEG)</a>
+                <a href="#lens-24-200" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">24-200mm Lensiniz</a>
+                <a href="#night-photography" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Gece Çekimi İpuçları</a>
+                <a href="#menu-overview" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Menüye Genel Bakış</a>
+                <a href="#tips" class="nav-link block py-2.5 px-4 rounded-md hover:bg-gray-700 hover:text-white transition-colors duration-150">Ek İpuçları</a>
+            </nav>
+            <div class="mt-auto pt-10 text-center text-xs text-gray-500">
+                <p>&copy; 2023 Kişisel Rehberiniz</p>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-10 lg:p-12 overflow-y-auto bg-gray-50">
+            
+            <section id="introduction" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Nikon Z6 II Dünyasına Hoş Geldiniz!</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Bu rehber, Nikon Z6 II fotoğraf makinenizi ve 24-200mm lensinizi kullanmaya başlarken size yardımcı olmak için tasarlandı. Amacımız, makinenizin temel tuşlarını, özelliklerini ve ayarlarını en basit şekilde anlamanızı sağlamaktır. Unutmayın, en iyi öğrenme yolu pratik yapmaktır!</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">İlk Adımlar:</h3>
+                    <ul class="list-disc list-inside space-y-4 text-gray-600 text-base">
+                        <li><strong>Batarya:</strong> Bataryanın tam dolu olduğundan emin olun. Kutu içeriğinden çıkan şarj aleti ile şarj edebilirsiniz. Makine üzerinden USB-C ile de şarj edilebilir (uygun bir USB-PD güç adaptörü ile ve makine kapalıyken veya bazı durumlarda açıkken de güç sağlayabilir).</li>
+                        <li><strong>Hafıza Kartı:</strong> Makineniz bir adet CFexpress (Tip B) veya XQD kartı ve bir adet SD (UHS-II önerilir) kartı destekler. Kartı doğru yönde (genellikle etiketi size bakacak veya arka panele doğru) yuvaya yavaşça itin. Yeni bir kartı ilk kez kullanmadan önce makinede formatlayın (Menü > Kurulum Menüsü > Hafıza Kartını Formatla). <strong>Formatlama tüm verileri siler!</strong></li>
+                        <li><strong>Lens Takma:</strong> Lensiniz NIKKOR Z 24-200mm f/4-6.3 VR. Lensin üzerindeki beyaz hizalama noktasını, makine gövdesindeki beyaz hizalama noktasıyla eşleştirin. Lensi yuvaya yerleştirip, makineye önden bakarken saat yönünde (sağa doğru) çevirerek "klik" sesini duyana kadar takın. Çıkarmak için lens serbest bırakma düğmesine (genellikle lens yuvasının sağ tarafında) basılı tutarak lensi saat yönünün tersine (sola doğru) çevirin.</li>
+                        <li><strong>Açma/Kapama:</strong> Makinenin üst panelindeki deklanşörün etrafında bulunan ON/OFF düğmesini kullanarak açıp kapatabilirsiniz.</li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-5 rounded-lg shadow-md">
+                    <p><strong class="font-bold">Görsel Notu:</strong> Bu rehberde kullanılan kamera ve lens görselleri temsilidir. En iyi deneyim için, `images` klasörüne kendi Nikon Z6 II ve lensinizin fotoğraflarını ekleyip, koddaki `<img>` etiketlerinin `src` yollarını buna göre güncelleyin. Hotspot konumlarını da kendi görsellerinize göre ayarlamanız gerekebilir.</p>
+                </div>
+            </section>
+
+            <section id="camera-tour-top" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Kamera Turu: Üst Panel</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Makinemizin üst kısmındaki kontrollerle başlayalım. Aşağıdaki görselde numaralandırılmış tuşların açıklamalarını inceleyebilirsiniz.</p>
+                <div class="text-center"> 
+                    <div class="camera-diagram bg-white p-3 md:p-4 rounded-lg shadow-xl inline-block">
+                        <img src="images/z6ii_top.jpg" alt="Nikon Z6 II Üst Panel Görünümü" class="object-contain max-h-[400px] md:max-h-[500px] mx-auto">
+                        
+                        <div class="hotspot" style="top: 38%; left: 28%;" title="Açma/Kapama Düğmesi ve Deklanşör">1
+                            <span class="hotspot-tooltip"><b>1. Açma/Kapama Düğmesi ve Deklanşör:</b> Makineyi açıp kapatır. Deklanşöre yarım basıldığında netleme ve pozlama yapar (AF-S modunda kilitler), tam basıldığında fotoğraf çeker.</span>
+                        </div>
+                        <div class="hotspot" style="top: 18%; left: 47%;" title="Video Kayıt Düğmesi">2
+                            <span class="hotspot-tooltip"><b>2. Video Kayıt Düğmesi (Kırmızı Nokta):</b> Fotoğraf modundayken hızlıca video kaydını başlatır ve durdurur. Video moduna geçmek için mod kadranı da kullanılabilir.</span>
+                        </div>
+                        <div class="hotspot" style="top: 18%; left: 57%;" title="ISO Düğmesi">3
+                             <span class="hotspot-tooltip"><b>3. ISO Düğmesi:</b> Işığa duyarlılığı (ISO) ayarlar. Düğmeye basılı tutup arka ayar kadranını (veya menüden atandıysa ön kadranı) çevirin.</span>
+                        </div>
+                        <div class="hotspot" style="top: 18%; left: 67%;" title="Pozlama Telafisi Düğmesi">4
+                            <span class="hotspot-tooltip"><b>4. Pozlama Telafisi (+/- Düğmesi):</b> P, S, A modlarında makinenin otomatik belirlediği pozlamayı aydınlatmak (+) veya karartmak (-) için kullanılır. Düğmeye basılı tutup bir ayar kadranını çevirin.</span>
+                        </div>
+                         <div class="hotspot" style="top: 60%; left: 17%;" title="Mod Kadranı">5
+                            <span class="hotspot-tooltip"><b>5. Mod Kadranı:</b> Çekim modunu (AUTO, P, S, A, M, U1, U2, U3) seçmenizi sağlar. Değiştirmek için ortasındaki kilit düğmesine basılı tutarak çevirin.</span>
+                        </div>
+                        <div class="hotspot" style="top: 42%; left: 78%;" title="Üst Kontrol Paneli (LCD)">6
+                            <span class="hotspot-tooltip"><b>6. Üst Kontrol Paneli (LCD):</b> Enstantane hızı, diyafram, ISO, pil durumu, kalan çekim sayısı gibi önemli çekim ayarlarını gösterir. Karanlıkta görmek için ışığı açılabilir (Açma/Kapama düğmesini aydınlatma sembolüne doğru çevirerek veya deklanşöre yarım basarak).</span>
+                        </div>
+                         <div class="hotspot" style="top: 60%; left: 83%;" title="Arka Ayar Kadranı">7
+                            <span class="hotspot-tooltip"><b>7. Arka Ayar Kadranı (Ana Ayar Kadranı):</b> Genellikle enstantane hızını (S ve M modunda), program kaydırmayı (P modunda) veya diyaframı (bazı özel ayarlarda) kontrol eder.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-xl mt-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">Önemli Tuşlar ve Açıklamaları (Üst Panel):</h3>
+                    <ol class="list-decimal list-outside space-y-3 text-gray-600 pl-5 text-base">
+                        <li><strong>Açma/Kapama Düğmesi ve Deklanşör:</strong> Makineyi açar/kapatır. Deklanşöre yarım basmak AF (otomatik netleme) ve AE (otomatik pozlama) sistemlerini etkinleştirir. Tam basmak fotoğrafı çeker.</li>
+                        <li><strong>Video Kayıt Düğmesi (Kırmızı Nokta):</strong> Hızlıca video kaydını başlatır/durdurur.</li>
+                        <li><strong>ISO Düğmesi:</strong> Basılı tutarken bir ayar kadranını çevirerek ISO değerini değiştirirsiniz.</li>
+                        <li><strong>Pozlama Telafisi (+/- Düğmesi):</strong> P, S, A gibi otomatik veya yarı otomatik modlarda, makinenin önerdiği pozlamayı bilinçli olarak daha aydınlık veya daha karanlık yapmak için kullanılır.</li>
+                        <li><strong>Mod Kadranı:</strong> Temel çekim modlarını seçersiniz. Kilitli bir kadrandır, değiştirmek için ortasındaki düğmeye basılı tutmanız gerekir.</li>
+                        <li><strong>Üst Kontrol Paneli (LCD):</strong> Çekimle ilgili kritik bilgileri anlık olarak gösterir.</li>
+                        <li><strong>Arka Ayar Kadranı (Ana Ayar Kadranı):</strong> Birçok ayarın değiştirilmesinde kullanılır, genellikle enstantane hızı veya diyafram gibi temel pozlama değişkenlerini kontrol eder (seçilen moda bağlı olarak).</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="camera-tour-back" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Kamera Turu: Arka Panel</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Makinemizin arka kısmındaki kontroller fotoğraf çekerken en çok kullanacaklarınızdır. Görseldeki numaralara dikkat edin.</p>
+                 <div class="text-center">
+                    <div class="camera-diagram bg-white p-3 md:p-4 rounded-lg shadow-xl inline-block">
+                        <img src="images/z6ii_back.png" alt="Nikon Z6 II Arka Panel Görünümü" class="object-contain max-h-[500px] md:max-h-[600px] mx-auto">
+                        
+                        <div class="hotspot" style="top: 10%; left: 27%;" title="Vizör (EVF)">1
+                            <span class="hotspot-tooltip"><b>1. Vizör (EVF - Elektronik Vizör):</b> Yüksek çözünürlüklü ekranıyla çektiğiniz sahneyi ve ayarları (pozlama, beyaz ayarı vb.) canlı olarak gösterir. Göz sensörü sayesinde vizöre yaklaştığınızda otomatik olarak LCD ekrandan vizöre geçiş yapar.</span>
+                        </div>
+                        <div class="hotspot" style="top: 12%; left: 42%;" title="Diyoptri Ayar Kadranı">2
+                            <span class="hotspot-tooltip"><b>2. Diyoptri Ayar Kadranı:</b> Vizörün netliğini göz bozukluğunuza göre ayarlamanızı sağlar. Vizöre bakarken kadranı çevirerek en net görüntüyü elde edin.</span>
+                        </div>
+                        <div class="hotspot" style="top: 7%; left: 68%;" title="Monitör Modu Düğmesi">3
+                             <span class="hotspot-tooltip"><b>3. Monitör Modu Düğmesi:</b> Görüntünün sadece vizörde, sadece LCD ekranda, otomatik olarak vizör/LCD arasında geçiş yapmasını veya vizör kapalıyken LCD'nin açık kalmasını sağlar.</span>
+                        </div>
+                        <div class="hotspot" style="top: 22%; left: 9%;" title="Oynatma Düğmesi">4
+                            <span class="hotspot-tooltip"><b>4. Oynatma Düğmesi (►):</b> Çektiğiniz fotoğrafları ve videoları hafıza kartından görüntüler.</span>
+                        </div>
+                        <div class="hotspot" style="top: 30%; left: 9%;" title="Silme Düğmesi">5
+                            <span class="hotspot-tooltip"><b>5. Silme Düğmesi (Çöp Kutusu Simgesi):</b> Oynatma modundayken görüntülenen fotoğrafı veya videoyu silmek için kullanılır. Onay için genellikle iki kez basmanız gerekir.</span>
+                        </div>
+                        <div class="hotspot" style="top: 24%; left: 88%;" title="AF-ON Düğmesi">6
+                            <span class="hotspot-tooltip"><b>6. AF-ON Düğmesi:</b> Otomatik netlemeyi deklanşörden bağımsız olarak etkinleştirir. "Back-button focus" tekniği için kullanılır, bu da netleme ve çekim eylemlerini ayırır.</span>
+                        </div>
+                        <div class="hotspot" style="top: 37%; left: 88%;" title="Alt Seçici (Joystick)">7
+                            <span class="hotspot-tooltip"><b>7. Alt Seçici (Joystick):</b> Netleme noktasını ekranda hızlıca hareket ettirmek ve menülerde gezinmek için kullanılır. Ortasına basmak genellikle netleme noktasını merkeze alır veya seçimi onaylar.</span>
+                        </div>
+                        <div class="hotspot" style="top: 43%; left: 9%;" title="MENU Düğmesi">8
+                            <span class="hotspot-tooltip"><b>8. MENU Düğmesi:</b> Kamera ayarlarına erişmek için ana menüyü açar.</span>
+                        </div>
+                        <div class="hotspot" style="top: 52%; left: 9%;" title="Yakınlaştırma (-) / Koruma / Yardım Düğmesi">9
+                            <span class="hotspot-tooltip"><b>9. Yakınlaştırma (-) / Koruma / Yardım (?) Düğmesi:</b> Oynatma modunda fotoğrafı uzaklaştırır veya çoklu kare (thumbnail) görünümüne geçer. Aynı zamanda fotoğrafları silinmeye karşı korumak için (anahtar simgesi) ve menülerde yardım bilgilerini göstermek için kullanılır.</span>
+                        </div>
+                        <div class="hotspot" style="top: 60%; left: 9%;" title="Uzaklaştırma (+) / Kalite Düğmesi">10
+                            <span class="hotspot-tooltip"><b>10. Uzaklaştırma (+) / Kalite/Boyut Düğmesi:</b> Oynatma modunda fotoğrafa yakınlaşarak netliği kontrol etmenizi sağlar. Çekim sırasında basılı tutup bir ayar kadranıyla görüntü kalitesi (RAW/JPEG) veya boyutunu (L, M, S) hızlıca değiştirebilirsiniz.</span>
+                        </div>
+                         <div class="hotspot" style="top: 65%; left: 48%;" title="LCD Monitör">11 
+                            <span class="hotspot-tooltip"><b>11. LCD Monitör:</b> Dokunmatik ve eğilebilir (yukarı/aşağı) ekran. Canlı önizleme (Live View), menü navigasyonu, fotoğraf/video oynatma ve dokunmatik netleme/çekim için kullanılır.</span>
+                        </div>
+                        <div class="hotspot" style="top: 57%; left: 88%;" title="OK Düğmesi">12
+                            <span class="hotspot-tooltip"><b>12. OK Düğmesi:</b> Menü seçimlerini onaylar ve bazı ayarları etkinleştirir.</span>
+                        </div>
+                        <div class="hotspot" style="top: 54%; left: 68%;" title="Çoklu Seçici (D-pad)">13
+                            <span class="hotspot-tooltip"><b>13. Çoklu Seçici (D-pad):</b> Menülerde yukarı-aşağı-sağa-sola gezinmek, netleme noktası seçmek (joystick yerine veya ek olarak) ve diğer çeşitli işlevler için kullanılır. Ortasındaki OK tuşuyla birlikte kullanılır.</span>
+                        </div>
+                         <div class="hotspot" style="top: 69%; left: 88%;" title="'i' Düğmesi">14
+                            <span class="hotspot-tooltip"><b>14. 'i' Düğmesi (Bilgi/İnteraktif Menü):</b> Hızlı ayar menüsünü açar. Fotoğraf ve video modları için ayrı ayrı özelleştirilebilen, sık kullandığınız ayarlara (Netleme modu, AF Alan modu, Görüntü Kalitesi, Picture Control vb.) çabuk erişim sağlar.</span>
+                        </div>
+                         <div class="hotspot" style="top: 77%; left: 88%;" title="DISP Düğmesi">15
+                            <span class="hotspot-tooltip"><b>15. DISP Düğmesi (Display - Ekran):</b> LCD ekranda veya vizörde gösterilen bilgi miktarını ve türünü değiştirir (temel bilgiler, detaylı bilgiler, histogram, sanal ufuk, bilgi yok vb.).</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-xl mt-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">Önemli Tuşlar ve Açıklamaları (Arka Panel):</h3>
+                    <ol class="list-decimal list-outside space-y-3 text-gray-600 pl-5 text-base">
+                        <li><strong>Vizör (EVF):</strong> Kompozisyon ve ayar kontrolü için birincil araç.</li>
+                        <li><strong>Diyoptri Ayar Kadranı:</strong> Kişisel göz ayarı için.</li>
+                        <li><strong>Monitör Modu Düğmesi:</strong> Vizör ve LCD ekran kullanımı arasında tercih yapmak için.</li>
+                        <li><strong>Oynatma Düğmesi (►):</strong> Çekimleri gözden geçirmek için.</li>
+                        <li><strong>Silme Düğmesi:</strong> İstenmeyen çekimleri kaldırmak için.</li>
+                        <li><strong>AF-ON Düğmesi:</strong> İleri düzey netleme kontrolü için.</li>
+                        <li><strong>Alt Seçici (Joystick):</strong> Hızlı netleme noktası seçimi ve menü navigasyonu.</li>
+                        <li><strong>MENU Düğmesi:</strong> Tüm kamera ayarlarına erişim.</li>
+                        <li><strong>Yakınlaştırma (-) / Koruma / Yardım (?) Düğmesi:</strong> Çok fonksiyonlu düğme.</li>
+                        <li><strong>Uzaklaştırma (+) / Kalite/Boyut Düğmesi:</strong> Netlik kontrolü ve hızlı görüntü ayarı.</li>
+                        <li><strong>LCD Monitör:</strong> Esnek kadrajlama, dokunmatik kontrol ve bilgi ekranı.</li>
+                        <li><strong>OK Düğmesi:</strong> Seçimleri onaylama.</li>
+                        <li><strong>Çoklu Seçici (D-pad):</strong> Alternatif navigasyon ve fonksiyon kontrolü.</li>
+                        <li><strong>'i' Düğmesi:</strong> Özelleştirilebilir hızlı erişim menüsü.</li>
+                        <li><strong>DISP Düğmesi:</strong> Görüntülenen bilgi miktarını ayarlama.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="camera-tour-front-sides" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Kamera Turu: Ön Panel ve Yanlar</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="bg-white p-8 rounded-xl shadow-xl">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Ön Panel</h3>
+                        <img src="images/z6ii_front.jpg" alt="Nikon Z6 II Ön Panel Görünümü" class="feature-image mx-auto mb-8 max-h-[400px] object-contain">
+                        <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                            <li><strong>Lens Yuvası (Bayonet):</strong> NIKKOR Z lenslerin takıldığı geniş çaplı Z mount.</li>
+                            <li><strong>Lens Serbest Bırakma Düğmesi:</strong> Lensi çıkarmak için bu düğmeye basılı tutarken lensi çevirin.</li>
+                            <li><strong>Fn1 ve Fn2 Düğmeleri:</strong> Özelleştirilebilir fonksiyon düğmeleri. Menüden (Özel Ayarlar Menüsü > f Kontroller > Özel Düğme Atamaları) bunlara sık kullandığınız bir ayarı (örn: Beyaz Dengesi, Netleme Alanı Modu, Sanal Ufuk) atayabilirsiniz.</li>
+                            <li><strong>Ön Ayar Kadranı (Alt Ayar Kadranı):</strong> Genellikle diyaframı (A ve M modunda), program kaydırmayı (P modunda) veya pozlama telafisini (bazı ayarlarda) kontrol eder.</li>
+                            <li><strong>AF Yardımcı Işığı:</strong> Düşük ışık koşullarında otomatik netlemeye yardımcı olmak için kısa süreliğine turuncu bir ışık yayar (menüden kapatılabilir: Özel Ayarlar Menüsü > a Otomatik Netleme > Dahili AF Yardımcı Aydınlatması).</li>
+                            <li><strong>Stereo Mikrofonlar:</strong> Video kaydı sırasında ortam sesini almak için (genellikle deklanşörün iki yanında veya vizör çıkıntısının önünde). Daha iyi ses kalitesi için harici mikrofon önerilir.</li>
+                            <li><strong>Zamanlayıcı Lambası:</strong> Otomatik zamanlayıcı devredeyken yanıp sönen lamba.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Yan Paneller</h3>
+                        <img src="images/z6ii_side_ports.jpg" alt="Nikon Z6 II Yan Panel Bağlantı Noktaları" class="feature-image mx-auto mb-8 max-h-[350px] object-contain">
+                        <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                            <li><strong>Sol Taraf (Kapaklar Altında):</strong>
+                                <ul class="list-disc list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Mikrofon Girişi:</strong> Harici mikrofon bağlamak için (3.5mm stereo mini-pin jack).</li>
+                                    <li><strong>Kulaklık Çıkışı:</strong> Video kaydı sırasında sesi dinlemek için (3.5mm stereo mini-pin jack).</li>
+                                    <li><strong>HDMI Bağlantı Noktası:</strong> Harici monitöre veya kaydediciye görüntü aktarmak için (Tip C).</li>
+                                    <li><strong>USB-C Bağlantı Noktası:</strong> Veri aktarımı, makineyi şarj etme (USB Power Delivery ile) ve sürekli güç sağlama için.</li>
+                                    <li><strong>Aksesuar Terminali:</strong> Kablolu uzaktan kumandalar (örn: MC-DC2) ve diğer aksesuarlar için.</li>
+                                </ul>
+                            </li>
+                            <li class="mt-4"><strong>Sağ Taraf (Kavrama Kısmı):</strong>
+                                <ul class="list-disc list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Hafıza Kartı Yuvası Kapağı:</strong> İki adet kart yuvası içerir:
+                                        <ul class="list-circle list-outside ml-6 mt-1">
+                                            <li><strong>Slot 1:</strong> CFexpress (Tip B) veya XQD kartları için.</li>
+                                            <li><strong>Slot 2:</strong> SD, SDHC, SDXC (UHS-II uyumlu) kartları için.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li class="mt-4"><strong>Alt Panel:</strong>
+                                <ul class="list-disc list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Batarya Yuvası Kapağı:</strong> EN-EL15 serisi bataryalar için.</li>
+                                    <li><strong>Tripod Bağlantı Yuvası:</strong> Standart 1/4 inç-20 UNC vida dişi.</li>
+                                    <li>(Opsiyonel) Dikey Grip Bağlantı Kontakları.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="basic-settings" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Temel Ayarlar: Pozlama Üçgeni</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Fotoğrafın doğru ışık alması (doğru pozlama) üç temel ayarın dengesine bağlıdır: Diyafram, Enstantane Hızı ve ISO. Bu üçlüye "Pozlama Üçgeni" denir ve birbirlerini etkilerler.</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">1. Diyafram (Aperture)</h3>
+                    <img src="images/diaphragm_illustration.jpg" alt="Diyafram açıklıklarını ve alan derinliğini gösteren illüstrasyon" class="feature-image mx-auto my-5 max-w-md">
+                    <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                        <li><strong>Nedir?</strong> Lensin içindeki, ışığın geçiş miktarını kontrol eden açıklıktır. İris çiçeğine benzetilebilir.</li>
+                        <li><strong>Nasıl İfade Edilir?</strong> "f" değeri ile (örneğin: f/1.8, f/2.8, f/4, f/5.6, f/8, f/11, f/16).</li>
+                        <li><strong>Temel Etkileri:</strong>
+                            <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                <li><strong>Işık Miktarı:</strong> Küçük f sayısı (örn: f/1.8) = Geniş diyafram açıklığı = Daha fazla ışık sensöre ulaşır. Büyük f sayısı (örn: f/16) = Dar diyafram açıklığı = Daha az ışık sensöre ulaşır.</li>
+                                <li><strong>Alan Derinliği (Depth of Field - DoF):</strong> Fotoğrafta net görünen alanın ön ve arka sınırlarıdır.
+                                    <ul>
+                                        <li><strong>Sığ Alan Derinliği:</strong> Küçük f sayısı (örn: f/1.8) ile elde edilir. Sadece netlenen konu net olur, ön ve arka plan bulanıklaşır. Portrelerde konuyu vurgulamak için idealdir.</li>
+                                        <li><strong>Geniş Alan Derinliği:</strong> Büyük f sayısı (örn: f/16) ile elde edilir. Kadrajdaki birçok şey (yakından uzağa) net olur. Manzara fotoğrafçılığında sıkça tercih edilir.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Nasıl Ayarlanır?</strong> Genellikle A (Diyafram Öncelikli) veya M (Manuel) çekim modundayken ön ayar kadranı (varsayılan) veya menüden atanmışsa arka ayar kadranı ile.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-xl mt-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">2. Enstantane Hızı (Shutter Speed)</h3>
+                    <img src="images/shutter_speed_effects.jpg" alt="Farklı enstantane hızlarının hareket üzerindeki (dondurma/bulanıklaştırma) etkisini gösteren illüstrasyon" class="feature-image mx-auto my-5 max-w-md">
+                    <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                        <li><strong>Nedir?</strong> Fotoğraf makinesinin deklanşörünün (perdesinin) ışığın sensöre ulaşmasına izin verdiği süredir.</li>
+                        <li><strong>Nasıl İfade Edilir?</strong> Saniye veya saniyenin kesirleri ile (örneğin: 1/4000sn, 1/250sn, 1/60sn, 1sn, 15sn, 30sn). Makine ekranında genellikle "1000" (1/1000sn anlamına gelir) veya "15"" (15 saniye anlamına gelir) gibi gösterilir.</li>
+                        <li><strong>Temel Etkileri:</strong>
+                            <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                <li><strong>Işık Miktarı:</strong> Hızlı enstantane (örn: 1/1000sn) = Kısa pozlama süresi = Daha az ışık. Yavaş enstantane (örn: 1sn) = Uzun pozlama süresi = Daha fazla ışık.</li>
+                                <li><strong>Hareketin Temsili:</strong>
+                                    <ul>
+                                        <li><strong>Hareketi Dondurma:</strong> Hızlı enstantane hızları (örn: 1/500sn ve üzeri) hareketli konuları (sporcular, uçan kuşlar, hızlı arabalar) net bir şekilde dondurur.</li>
+                                        <li><strong>Hareket Bulanıklığı (Motion Blur):</strong> Yavaş enstantane hızları (örn: 1/30sn ve altı) hareketli konuların bulanık görünmesini sağlar. Bu, akan suyun ipeksi görünmesi veya araba farlarının ışık izleri oluşturması gibi sanatsal efektler için kullanılır. Çok yavaş enstantanelerde (genellikle 1/60sn'den yavaş) el titremesini önlemek için tripod gerekir.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Nasıl Ayarlanır?</strong> Genellikle S (Enstantane Öncelikli) veya M (Manuel) çekim modundayken arka ayar kadranı (varsayılan) veya menüden atanmışsa ön ayar kadranı ile.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-xl mt-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">3. ISO</h3>
+                    <img src="images/iso_noise_comparison.jpg" alt="Farklı ISO değerlerinin görüntü gürültüsü (kumlanma) üzerindeki etkisini gösteren illüstrasyon" class="feature-image mx-auto my-5 max-w-md">
+                    <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                        <li><strong>Nedir?</strong> Fotoğraf makinesi sensörünün ışığa olan duyarlılığının ölçüsüdür. Eskiden film hızlarını ifade ederdi.</li>
+                        <li><strong>Nasıl İfade Edilir?</strong> Sayısal değerlerle (örneğin: ISO 100, ISO 200, ISO 400, ISO 800, ISO 1600, ISO 3200, ISO 6400 ve üzeri). Nikon Z6 II'nin doğal (native) ISO aralığı genellikle ISO 64 ile ISO 51200 arasındadır ve genişletilmiş seçeneklerle daha da düşürülebilir veya yükseltilebilir.</li>
+                        <li><strong>Temel Etkileri:</strong>
+                            <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                <li><strong>Görüntü Parlaklığı:</strong> ISO değeri arttıkça, aynı diyafram ve enstantane ayarlarında görüntü daha parlak olur. Bu, düşük ışık koşullarında daha hızlı enstantane veya daha dar diyafram kullanabilmenizi sağlar.</li>
+                                <li><strong>Görüntü Gürültüsü (Noise/Kumlanma):</strong> ISO değeri arttıkça, görüntüdeki dijital gürültü (renkli veya parlaklık benekleri şeklinde kumlanma) artar. Bu, görüntü kalitesini düşürebilir, detay kaybına ve renklerin soluklaşmasına neden olabilir.
+                                    <ul>
+                                        <li><strong>Düşük ISO (örn: ISO 64-400):</strong> En iyi görüntü kalitesi, en az gürültü. Mümkün olduğunca bu aralıkta kalmaya çalışın, özellikle bol ışık varsa.</li>
+                                        <li><strong>Yüksek ISO (örn: ISO 1600 ve üzeri):</strong> Düşük ışıkta elde çekim yapmak gerektiğinde veya hareketi dondurmak için hızlı enstantane gerektiğinde kullanılır. Gürültü kaçınılmazdır ama Z6 II gibi modern kameralar yüksek ISO'larda bile kabul edilebilir sonuçlar verir.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Nasıl Ayarlanır?</strong> Üst paneldeki ISO düğmesine basılı tutup bir ayar kadranını çevirerek veya 'i' menüsünden ya da ana menüden (Fotoğraf Çekimi Menüsü > ISO Duyarlılığı Ayarları). Otomatik ISO özelliği de (Auto ISO) kullanılabilir; burada makine, belirlediğiniz maksimum ISO ve minimum enstantane hızı sınırları içinde ISO'yu otomatik ayarlar.</li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Pozlama Üçgeni Dengesi:</h4>
+                    <p class="leading-relaxed text-base">Bu üç ayar (Diyafram, Enstantane, ISO) birbirine sıkı sıkıya bağlıdır. Bir ayarı değiştirdiğinizde (örneğin diyaframı daha fazla ışık alacak şekilde açtığınızda), pozlamayı dengede tutmak için diğer ayarlardan birini veya ikisini de (örneğin enstantaneyi hızlandırarak veya ISO'yu düşürerek) ayarlamanız gerekebilir. Makinenizin pozometresi (vizörde veya LCD ekranda görünen, genellikle -2...0...+2 gibi bir ölçek) size doğru pozlamaya ne kadar yakın olduğunuzu gösterir. P, S, A modlarında makine bu dengeyi sizin için kurmaya çalışır; M modunda ise tüm kontrol ve sorumluluk sizdedir.</p>
+                </div>
+            </section>
+            
+            <section id="shooting-modes" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Çekim Modları (Mod Kadranı)</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Mod kadranı, fotoğraf makinenizin temel çalışma prensibini belirler ve pozlama ayarlarını ne kadar sizin kontrol edeceğinizi seçmenizi sağlar.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-green-600 mb-3">AUTO (Otomatik Mod)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Tam otomatik mod. Makine, sahneyi analiz ederek tüm ayarları (diyafram, enstantane, ISO, beyaz dengesi, netleme vb.) kendisi yapar. Yeni başlayanlar için veya hızlıca bir anı yakalamak istediğinizde idealdir. Sadece kadrajlayın ve çekin! Ancak yaratıcı kontrolünüz sınırlıdır.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-sky-600 mb-3">P (Programlanmış Otomatik)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Makine, diyafram ve enstantane hızını otomatik olarak uygun bir kombinasyonda ayarlar. Ancak siz ISO, beyaz dengesi, pozlama telafisi gibi diğer önemli ayarları kontrol edebilirsiniz. Ayrıca, ayar kadranını çevirerek makinenin önerdiği diyafram/enstantane kombinasyonları arasında (aynı pozlamayı koruyarak) geçiş yapabilirsiniz (Program Kaydırma).</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-orange-600 mb-3">S (Enstantane Öncelikli Otomatik)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Siz enstantane hızını (hareketi dondurmak veya bulanıklaştırmak için) seçersiniz, makine buna uygun doğru pozlamayı sağlayacak diyafram değerini otomatik olarak ayarlar. ISO'yu manuel veya otomatik seçebilirsiniz. Spor, vahşi yaşam veya hareketli herhangi bir konuyu çekerken kullanışlıdır. Enstantane hızı genellikle arka ayar kadranı ile ayarlanır.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-purple-600 mb-3">A (Diyafram Öncelikli Otomatik)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Siz diyafram açıklığını (alan derinliğini kontrol etmek için) seçersiniz, makine buna uygun doğru pozlamayı sağlayacak enstantane hızını otomatik olarak ayarlar. ISO'yu manuel veya otomatik seçebilirsiniz. Portre (arka planı bulanık yapmak için) veya manzara (her yerin net olması için) çekimlerinde sıkça kullanılır. Diyafram değeri genellikle ön ayar kadranı ile ayarlanır.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-red-600 mb-3">M (Manuel Mod)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Tam manuel kontrol. Hem diyaframı hem de enstantane hızını siz ayarlarsınız. ISO'yu da manuel veya otomatik (Auto ISO ile üst sınır belirleyerek) seçebilirsiniz. Pozlama üzerinde tam yaratıcı kontrol sağlar ancak doğru pozlamayı bulmak biraz deneyim ve makinenin pozometresini okuma becerisi gerektirir. Gece çekimleri, stüdyo fotoğrafçılığı veya özel efektler için idealdir.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-semibold text-slate-700 mb-3">U1, U2, U3 (Kullanıcı Ayarları)</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Sık kullandığınız belirli çekim senaryoları için özel ayar kombinasyonlarınızı (çekim modu, ISO, WB, netleme ayarları vb.) bu modlara kaydedebilirsiniz. Örneğin, U1'e kuş fotoğrafçılığı ayarlarınızı, U2'ye portre ayarlarınızı, U3'e ise gece manzarası ayarlarınızı kaydedip mod kadranından hızlıca bu ayarlara geçebilirsiniz. Ayarlar menüsünden (Kurulum Menüsü > Kullanıcı Ayarlarını Kaydet) kaydedilir.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="focusing" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Netleme (Odaklama)</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Net bir fotoğraf, fotoğrafçılığın temel taşlarından biridir. Nikon Z6 II, konunuzu keskin bir şekilde yakalamanıza yardımcı olacak gelişmiş ve esnek bir otomatik netleme (AF) sistemine sahiptir.</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">Netleme Modları (Focus Modes):</h3>
+                    <p class="mb-4 text-gray-600 text-base">'i' menüsünden veya özel atanmış bir tuşla (örn: Fn1/Fn2, varsayılan olarak atanmamış olabilir) ve ayar kadranıyla hızlıca erişilebilir. Fotoğraf Çekimi Menüsü altında da bulunur.</p>
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li>
+                            <strong>AF-S (Single AF - Tekli AF / Tek Servo AF):</strong> Sabit, hareketsiz konular için idealdir. Deklanşöre yarım bastığınızda makine netler ve netlemeyi o noktada kilitler. Konu hareket ederse veya siz kadrajı değiştirirseniz yeniden netlemeniz gerekir. Genellikle portre, manzara, natürmort gibi çekimlerde kullanılır.
+                        </li>
+                        <li>
+                            <strong>AF-C (Continuous AF - Sürekli AF / Sürekli Servo AF):</strong> Hareketli konular için tasarlanmıştır. Deklanşöre yarım bastığınız sürece makine, seçili netleme noktası veya alanındaki konuyu takip ederek sürekli olarak yeniden netleme yapar. Spor, vahşi yaşam, oynayan çocuklar gibi hareketli hedefleri çekmek için vazgeçilmezdir.
+                        </li>
+                        <li>
+                            <strong>AF-F (Full-time AF - Tam Zamanlı AF):</strong> Bu mod genellikle video kaydı sırasında kullanılır (fotoğraf modunda da seçilebilir ama daha az yaygındır). Makine, deklanşöre basmasanız bile sürekli olarak sahnedeki değişikliklere göre netlemeyi ayarlar. Fotoğraf modunda, canlı önizlemede sürekli bir "avlanma" (hunting) hissine neden olabilir.
+                        </li>
+                        <li>
+                            <strong>MF (Manual Focus - Manuel Netleme):</strong> Netlemeyi tamamen siz kontrol edersiniz. Lens üzerindeki netleme halkasını çevirerek konunuzu netlersiniz. Makro çekimler, çok düşük ışık koşulları, cam arkasından çekim gibi AF sisteminin zorlanabileceği durumlarda veya hassas netleme gerektiren sanatsal çekimlerde tercih edilir. Z6 II, manuel netlemeyi kolaylaştırmak için "focus peaking" (net alanları renkli gösterme) ve büyütülmüş görünüm gibi yardımcı özellikler sunar.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-xl mt-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">AF Alanı Modları (AF-Area Modes):</h3>
+                    <p class="mb-4 text-gray-600 text-base">'i' menüsünden veya özel atanmış bir tuşla ve ayar kadranıyla hızlıca erişilebilir. Makinenin netleme yapmak için kadrajın hangi bölgesini ve nasıl kullanacağını belirler.</p>
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li><strong>Nokta AF (Pinpoint AF):</strong> Çok küçük, kesin bir alanda hassas netleme yapmak için kullanılır. Özellikle hareketsiz ve çok küçük detaylara (örneğin bir çiçeğin poleni, bir gözün irisi) netleme yaparken idealdir. AF-S modunda daha kullanışlıdır.</li>
+                        <li><strong>Tek Nokta AF (Single-point AF):</strong> Kadrajda sizin seçtiğiniz tek bir netleme noktası kullanılır. Kompozisyon üzerinde tam kontrol sağlar ve konunun tam olarak nerede net olacağını belirlemenizi sağlar. Joystick veya dokunmatik ekranla netleme noktasını kolayca taşıyabilirsiniz.</li>
+                        <li><strong>Dinamik Alan AF (Dynamic-area AF - S, M, L):</strong> Siz birincil bir netleme noktası seçersiniz. Eğer konu bu noktadan kısa bir süreliğine kayarsa, makine seçili noktanın etrafındaki komşu netleme noktalarını kullanarak konuyu takip etmeye devam eder. Hareketli konular için iyi bir seçenektir. S (küçük), M (orta) ve L (büyük) olarak farklı çevreleyici nokta sayıları sunar. Genellikle AF-C ile birlikte kullanılır.</li>
+                        <li><strong>Geniş Alan AF (Wide-area AF - S, L):</strong> Tek Nokta AF'den daha geniş bir netleme alanı sunar. İki boyutu vardır: S (küçük) ve L (büyük). Kadrajın belirli bir bölgesindeki, öngörülebilir şekilde hareket eden veya nispeten büyük bir konuyu yakalamak için kullanışlıdır. İnsan/Hayvan Gözü/Yüzü Algılama bu modda da çalışır.</li>
+                        <li><strong>Otomatik Alan AF (Auto-area AF):</strong> Makine, kadrajdaki tüm netleme noktalarını kullanarak sahneyi analiz eder ve en olası ana konuyu otomatik olarak algılayıp ona netler. Özellikle insan veya hayvan yüzü/gözü algılama özellikleri (menüden etkinleştirilir) açıksa çok etkilidir. Konunun kadrajda nerede olacağı belirsizse veya hızlı tepki vermek gerekiyorsa işe yarayabilir.</li>
+                        <li><strong>Hayvan/İnsan Gözü/Yüzü Algılama AF:</strong> Bu başlı başına bir mod değildir, ancak Geniş Alan AF ve Otomatik Alan AF modlarında çalışır. Özel Ayarlar Menüsü'nden (a Otomatik Netleme > AF konu algılama seçenekleri) insan veya hayvan (veya otomatik) seçimi yapılabilir. Makine kadrajdaki insan veya hayvanların yüzlerini ve hatta gözlerini algılayıp onlara öncelikli olarak netler. Portre ve evcil hayvan/vahşi yaşam fotoğrafçılığı için devrim niteliğindedir.</li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Pratik Netleme İpuçları:</h4>
+                    <ul class="list-disc list-outside mt-2 space-y-2 pl-5 text-base leading-relaxed">
+                        <li><strong>Sabit Konular İçin:</strong> Genellikle <strong>AF-S</strong> Netleme Modu ve <strong>Tek Nokta AF</strong> Alan Modu iyi bir başlangıçtır. Netleme noktasını konunuzun en önemli kısmına (örn: portrede göze) getirin.</li>
+                        <li><strong>Hareketli Konular İçin:</strong> <strong>AF-C</strong> Netleme Modu şarttır. AF Alan Modu olarak <strong>Dinamik Alan AF</strong> (konunun hareket öngörülebilirliğine göre S, M veya L), <strong>Geniş Alan AF (L)</strong> veya <strong>Otomatik Alan AF</strong> (özellikle Göz/Yüz Algılama açıkken) deneyin.</li>
+                        <li><strong>Göz/Yüz Algılama:</strong> İnsan veya hayvan çekiyorsanız, bu özelliği mutlaka kullanın. Hayatınızı çok kolaylaştıracaktır.</li>
+                        <li><strong>AF-ON Düğmesi (Back-Button Focus):</strong> Bu tekniği öğrenmek, netleme ve deklanşöre basma eylemlerini ayırdığı için özellikle hareketli konularda daha fazla kontrol ve isabet sağlayabilir. Araştırıp denemenizi öneririm.</li>
+                        <li><strong>Netleme Noktası Seçimi:</strong> Joystick (alt seçici) veya dokunmatik ekranı kullanarak netleme noktanızı hızlıca ve sezgisel olarak taşıyabilirsiniz.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="white-balance" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Beyaz Dengesi (White Balance - WB)</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Beyaz Dengesi (WB), fotoğraflarınızdaki renklerin doğru ve doğal görünmesini sağlar. Farklı ışık kaynakları (güneş ışığı, gölge, ampul, floresan lamba) farklı "renk sıcaklıklarına" sahiptir. Gözümüz bu değişikliklere otomatik olarak adapte olurken, fotoğraf makinelerinin doğru renkleri yakalayabilmesi için WB ayarına ihtiyacı vardır. Amaç, beyaz bir nesnenin fotoğrafta gerçekten beyaz görünmesidir.</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">Yaygın Beyaz Dengesi Ayarları:</h3>
+                    <p class="mb-4 text-gray-600 text-base">'i' menüsünden, özel atanmış bir tuşla (örn: Fn1/Fn2, varsayılan olarak atanmamış olabilir) ve ayar kadranıyla veya Fotoğraf Çekimi Menüsü'nden erişilebilir.</p>
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li><strong>AUTO (Otomatik Beyaz Dengesi):</strong> Makine, mevcut ışık koşullarını analiz ederek en uygun WB ayarını bulmaya çalışır. Modern kameralarda AUTO WB genellikle oldukça iyi sonuçlar verir, özellikle karmaşık veya değişen ışık koşullarında. Farklı AUTO seçenekleri olabilir (örn: AUTO0 Normal, AUTO1 Sıcak Işığı Koru, AUTO2 Beyazları Koru).</li>
+                        <li><strong>Doğrudan Güneş Işığı (☀️ Direct Sunlight):</strong> Açık havada, parlak güneşli günlerde kullanılır. Yaklaşık 5200 Kelvin (K) renk sıcaklığına ayarlanır.</li>
+                        <li><strong>Gölge (⛱️ Shade):</strong> Gölgeli alanlarda veya açık havada bulutsuz ama doğrudan güneş almayan yerlerde kullanılır. Gölgedeki ışık daha mavidir, bu ayar renkleri biraz ısıtarak (daha sarı/turuncu tonlar ekleyerek) bunu dengeler. Yaklaşık 7000-8000K.</li>
+                        <li><strong>Bulutlu (☁️ Cloudy):</strong> Kapalı, bulutlu havalarda kullanılır. Güneş ışığından biraz daha soğuk (maviye yakın) bir ışıktır. Bu ayar da renkleri biraz ısıtır. Yaklaşık 6000K.</li>
+                        <li><strong>Akkor Lamba (💡 Incandescent / Tungsten):</strong> Evlerdeki geleneksel sarı/turuncu ışık veren ampuller (tungsten lambalar) için kullanılır. Bu ışık çok sıcaktır, bu ayar mavi tonları artırarak sarılığı/turunculuğu dengeler. Yaklaşık 3000K.</li>
+                        <li><strong>Floresan (Fluorescent):</strong> Floresan lamba ışığında kullanılır. Farklı floresan tipleri (örn: beyaz, gün ışığı, sıcak beyaz) farklı renk tonları ürettiği için, genellikle birkaç farklı floresan ayarı bulunur veya ince ayar yapılabilir. Floresan ışıklar genellikle yeşil veya macenta bir renk kaymasına neden olabilir.</li>
+                        <li><strong>Flaş (⚡ Flash):</strong> Makine üzeri veya harici flaş kullanıldığında seçilir. Flaş ışığı genellikle gün ışığına yakın bir renk sıcaklığına sahiptir. Yaklaşık 5500-6000K.</li>
+                        <li><strong>K (Renk Sıcaklığı Seçimi / Choose Color Temp.):</strong> Kelvin (K) cinsinden renk sıcaklığı değerini manuel olarak siz girersiniz (örn: 2500K ile 10000K arası). Bu, belirli bir ışık kaynağının renk sıcaklığını biliyorsanız veya yaratıcı renk efektleri elde etmek istiyorsanız tam kontrol sağlar.</li>
+                        <li><strong>PRE (Ön Ayarlı Manuel / Preset Manual):</strong> O anki ışık koşullarına göre özel bir beyaz dengesi ayarı yapmanızı sağlar. Bunun için nötr beyaz veya gri bir referans objesi (örn: beyaz kağıt, gri kart) çekilir ve makine bu referansa göre WB'yi ayarlar. En doğru renkleri elde etmek için, özellikle stüdyo veya karmaşık yapay ışıklandırma durumlarında çok etkilidir.</li>
+                    </ul>
+                </div>
+                 <div class="mt-8 bg-teal-50 border-l-4 border-teal-500 text-teal-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">RAW Çekimin Beyaz Dengesi Avantajı:</h4>
+                    <p class="leading-relaxed text-base">Eğer fotoğraflarınızı <strong>RAW (.NEF)</strong> formatında çekiyorsanız, beyaz dengesi ayarını çekimden sonra düzenleme yazılımlarında (Adobe Lightroom, Capture One, Nikon NX Studio vb.) hiçbir kalite kaybı olmadan ve tam esneklikle değiştirebilirsiniz. Bu nedenle, RAW çeken birçok fotoğrafçı genellikle AUTO WB modunu kullanır ve gerekirse sonradan ince ayar yapar. JPEG çekiyorsanız, WB ayarını çekim sırasında doğru yapmak daha önemlidir çünkü JPEG dosyasına WB "pişirilir" ve sonradan büyük değişiklikler yapmak kalite kaybına yol açabilir.</p>
+                    <p class="mt-3 leading-relaxed text-base"><strong>İpucu:</strong> Farklı WB ayarlarını deneyerek ışığın renkler üzerindeki etkisini gözlemleyin. Bu, ışığı daha iyi anlamanıza ve istediğiniz atmosferi yaratmanıza yardımcı olacaktır.</p>
+                </div>
+            </section>
+
+            <section id="metering" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Pozlama Ölçümü (Metering Modes)</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Pozlama ölçüm modu, fotoğraf makinenizin P, S, A gibi otomatik veya yarı otomatik çekim modlarında doğru pozlamayı (yani fotoğrafın ne çok aydınlık ne de çok karanlık olmasını) belirlemek için sahnenin hangi bölümündeki ışığı analiz edeceğini seçmenizi sağlar. M (Manuel) modda ise ölçüm sistemi size doğru pozlamaya ne kadar yakın olduğunuzu gösterir.</p>
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-5">Ölçüm Modları:</h3>
+                    <p class="mb-4 text-gray-600 text-base">'i' menüsünden veya özel atanmış bir tuşla (genellikle varsayılan olarak atanmamıştır) ve ayar kadranıyla veya Fotoğraf Çekimi Menüsü'nden erişilebilir.</p>
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li>
+                            <strong>Matrix Ölçüm (Matrix Metering / Değerlendirmeli Ölçüm):</strong> Makine, tüm sahneyi geniş bir alanda analiz eder ve parlaklık, kontrast, renk, konu mesafesi (eğer D tipi lens kullanılıyorsa) gibi birçok faktörü dikkate alarak dengeli bir pozlama belirlemeye çalışır. Nikon'un Matrix ölçümü genellikle çok başarılıdır ve çoğu çekim durumu için en iyi ve en güvenilir sonucu verir. Genellikle varsayılan ayardır ve yeni başlayanlar için iyi bir başlangıç noktasıdır.
+                        </li>
+                        <li>
+                            <strong>Merkez Ağırlıklı Ölçüm (Center-weighted Metering):</strong> Makine yine tüm sahneyi ölçer ancak pozlama hesaplamasında kadrajın merkezindeki (genellikle %60-75 oranında) alana daha fazla ağırlık verir. Kenarlardaki çok parlak veya çok karanlık alanların pozlamayı aşırı etkilemesini engellemeye yardımcı olabilir. Özellikle konunun kadrajın merkezinde veya merkeze yakın olduğu durumlarda (örn: klasik portreler) kullanışlıdır.
+                        </li>
+                        <li>
+                            <strong>Nokta Ölçüm (Spot Metering):</strong> Makine, sadece seçili aktif netleme noktası etrafındaki çok küçük bir alanı (genellikle tüm karenin %1.5 - %2.5'i kadar) ölçer. Bu mod, sahnedeki belirli bir tonu (örn: bir yüzün ten tonu, gri bir kart) doğru pozlamak istediğinizde ve bu tonun sahnenin genelinden çok farklı olduğu durumlarda (örn: arkadan güçlü ışık alan bir portre, sahne sanatları) size hassas kontrol sağlar. Ancak doğru kullanmak deneyim gerektirir çünkü yanlış bir noktayı ölçerseniz pozlama tamamen yanlış olabilir.
+                        </li>
+                        <li>
+                            <strong>Parlak Ton Ağırlıklı Ölçüm (Highlight-weighted Metering):</strong> Bu mod, özellikle sahnedeki parlak alanların (highlights) detayını korumaya odaklanır, yani bu alanların "patlamasını" (aşırı pozlanarak tüm detayın kaybolmasını) engellemeye çalışır. Gelinlik gibi beyaz ağırlıklı sahneler, karlı manzaralar veya sahne ışıklarının olduğu konser gibi yüksek kontrastlı durumlarda kullanışlıdır. Bu modda gölgeler biraz karanlık kalabilir, ancak RAW çekiyorsanız gölge detaylarını sonradan kurtarmak genellikle parlak alan detaylarını kurtarmaktan daha kolaydır.
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Hangi Ölçüm Modunu Ne Zaman Kullanmalı?</h4>
+                    <ul class="list-disc list-outside mt-2 space-y-2 pl-5 text-base leading-relaxed">
+                        <li><strong>Yeni Başlayanlar ve Genel Çekimler İçin:</strong> <strong>Matrix Ölçüm</strong> genellikle en iyi ve en tutarlı sonuçları verir. Makinenize güvenin.</li>
+                        <li><strong>Konu Merkezdeyse ve Arka Plan Aldatıcıysa:</strong> <strong>Merkez Ağırlıklı Ölçüm</strong> deneyebilirsiniz.</li>
+                        <li><strong>Hassas Pozlama Kontrolü Gerektiğinde (Yüksek Kontrastlı Sahneler):</strong> <strong>Nokta Ölçüm</strong>, konunuzun belirli bir bölümünün doğru pozlanmasını sağlamak için güçlü bir araçtır, ancak dikkatli kullanılmalıdır.</li>
+                        <li><strong>Parlak Alan Detayları Kritikse:</strong> <strong>Parlak Ton Ağırlıklı Ölçüm</strong>, beyazların patlamasını önlemede yardımcı olabilir.</li>
+                    </ul>
+                    <p class="mt-3 leading-relaxed text-base">Unutmayın, pozlama telafisi (+/- düğmesi) tüm bu ölçüm modlarıyla birlikte çalışır. Makinenin ölçümü istediğiniz gibi değilse, pozlama telafisi ile sonuca ince ayar yapabilirsiniz.</p>
+                </div>
+            </section>
+
+            <section id="image-quality" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Görüntü Kalitesi (RAW vs. JPEG)</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Fotoğraf makineniz, çektiğiniz görüntüleri farklı dosya formatlarında ve kalitelerde kaydedebilir. En temel ve en önemli ayrım, RAW ve JPEG formatları arasındadır. Bu seçim, fotoğraflarınızla sonradan ne kadar işlem yapabileceğinizi büyük ölçüde etkiler.</p>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="bg-white p-8 rounded-xl shadow-xl">
+                        <h3 class="text-2xl font-semibold text-sky-600 mb-5">JPEG (JPG)</h3>
+                        <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                            <li><strong>Nedir?</strong> Sıkıştırılmış bir görüntü dosyası formatıdır. Fotoğraf makinesi, sensörden aldığı ham veriyi işler (beyaz dengesi, keskinlik, kontrast, renk doygunluğu gibi Picture Control ayarlarını uygular), sıkıştırır ve sonuç olarak "bitmiş" bir JPEG dosyası oluşturur.</li>
+                            <li><strong>Avantajları:</strong>
+                                <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Daha Küçük Dosya Boyutu:</strong> Sıkıştırma sayesinde RAW dosyalarına göre çok daha az yer kaplarlar. Bu, hafıza kartınıza daha fazla fotoğraf sığdırabileceğiniz ve depolama alanından tasarruf edebileceğiniz anlamına gelir.</li>
+                                    <li><strong>Doğrudan Kullanıma Hazır:</strong> JPEG dosyaları hemen hemen her cihaz ve yazılım tarafından görüntülenebilir, doğrudan sosyal medyada paylaşılabilir veya baskıya gönderilebilir. Ek bir işlem gerektirmezler.</li>
+                                    <li><strong>Hızlı İş Akışı:</strong> Fotoğraflar makinede işlendiği için, sonrasında düzenleme için daha az zaman harcamanız gerekebilir (eğer makine ayarları istediğiniz sonucu verdiyse).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Dezavantajları:</strong>
+                                <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Veri Kaybı:</strong> Sıkıştırma işlemi "kayıplı" olabilir, yani görüntü verisinin bir kısmı kalıcı olarak atılır. Bu, özellikle aşırı düzenleme yapıldığında kalite düşüşüne neden olabilir.</li>
+                                    <li><strong>Daha Az Düzenleme Esnekliği:</strong> Beyaz dengesi, pozlama, parlak ve gölge alanlardaki detaylar gibi konularda RAW dosyalarına kıyasla çok daha az düzenleme payı sunarlar. Yanlış pozlanmış bir JPEG'i kurtarmak genellikle zordur.</li>
+                                    <li><strong>"Pişirilmiş" Görüntü:</strong> Picture Control gibi makine ayarları görüntüye kalıcı olarak uygulandığı için, sonradan bu ayarları değiştirmek sınırlıdır.</li>
+                                </ul>
+                            </li>
+                            <li><strong>JPEG Ayarları:</strong> Z6 II'de genellikle Kalite (Fine, Normal, Basic) ve Boyut (Large (L), Medium (M), Small (S)) olarak ayarlanır. En iyi JPEG kalitesi için "Fine" kalite ve "Large" boyut seçeneğini kullanın.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-xl">
+                        <h3 class="text-2xl font-semibold text-purple-600 mb-5">RAW (Nikon için .NEF uzantılı)</h3>
+                        <ul class="list-disc list-outside space-y-3 text-gray-600 pl-5 text-base">
+                            <li><strong>Nedir?</strong> Sensörden gelen ham, işlenmemiş veridir. Dijital bir "negatif" gibidir. Beyaz dengesi, keskinlik, kontrast gibi ayarlar dosyaya gömülür ancak kalıcı olarak uygulanmaz; sadece bir başlangıç noktası olarak kaydedilir.</li>
+                            <li><strong>Avantajları:</strong>
+                                <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Maksimum Görüntü Kalitesi ve Detay:</strong> Sensörün yakaladığı tüm bilgiyi içerir.</li>
+                                    <li><strong>Geniş Dinamik Aralık:</strong> Parlak ve gölge alanlarda JPEG'e göre çok daha fazla detay barındırır. Bu, zorlu ışık koşullarında çekilen fotoğraflarda detay kurtarmayı kolaylaştırır.</li>
+                                    <li><strong>Üstün Düzenleme Esnekliği:</strong> Beyaz dengesi, pozlama, renkler, keskinlik, gürültü azaltma gibi birçok ayarı düzenleme yazılımında (örn: Adobe Lightroom, Capture One, Nikon NX Studio) kalite kaybı olmadan ve geniş bir aralıkta değiştirebilirsiniz.</li>
+                                    <li><strong>Tahribatsız Düzenleme:</strong> RAW dosyası üzerinde yapılan düzenlemeler genellikle orijinal dosyayı değiştirmez; bunun yerine düzenleme talimatları ayrı bir dosyada veya katalogda saklanır.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Dezavantajları:</strong>
+                                <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                    <li><strong>Daha Büyük Dosya Boyutu:</strong> İşlenmemiş ve sıkıştırılmamış (veya kayıpsız sıkıştırılmış) oldukları için JPEG'lere göre önemli ölçüde daha fazla yer kaplarlar.</li>
+                                    <li><strong>İşlem Gerektirir:</strong> RAW dosyalarını doğrudan paylaşamaz veya bastıramazsınız. Görüntülenebilir bir formata (genellikle JPEG veya TIFF) dönüştürülmeden önce özel bir RAW düzenleme yazılımıyla "işlenmeleri" (develop) gerekir.</li>
+                                    <li><strong>Daha Yavaş İş Akışı:</strong> Her fotoğrafın tek tek işlenmesi zaman alabilir.</li>
+                                </ul>
+                            </li>
+                             <li><strong>RAW Ayarları:</strong> Z6 II'de farklı RAW seçenekleri bulunur:
+                                 <ul>
+                                     <li><strong>Kayıpsız Sıkıştırılmış (Lossless compressed):</strong> Dosya boyutunu biraz azaltır ama görüntü kalitesinden ödün vermez. Genellikle en iyi seçenektir.</li>
+                                     <li><strong>Sıkıştırılmış (Compressed):</strong> Dosya boyutunu daha fazla azaltır ama çok az da olsa kalite kaybı olabilir (genellikle fark edilmez).</li>
+                                     <li><strong>Sıkıştırılmamış (Uncompressed):</strong> En büyük dosya boyutu, teorik olarak en saf veri ama pratikte kayıpsız sıkıştırılmıştan farkı çok azdır.</li>
+                                     <li>Bit Derinliği: Genellikle 12-bit veya 14-bit seçenekleri sunulur. 14-bit daha fazla renk ve ton bilgisi sağlar ama dosya boyutu biraz daha büyük olur.</li>
+                                 </ul>
+                             </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Hangi Formatı Seçmeli?</h4>
+                    <ul class="list-disc list-outside mt-2 space-y-2 pl-5 text-base leading-relaxed">
+                        <li><strong>En İyi Kalite ve Düzenleme Esnekliği İçin:</strong> Kesinlikle <strong>RAW</strong> (veya RAW + JPEG Fine) çekim yapın. Özellikle fotoğraflarınızı sonradan düzenlemeyi, renk ve pozlama üzerinde tam kontrol sahibi olmayı ve en yüksek kalitede baskılar almayı düşünüyorsanız RAW formatı vazgeçilmezdir.</li>
+                        <li><strong>Hızlı Paylaşım, Sınırlı Depolama Alanı, Düzenlemeye Vakit Yoksa:</strong> <strong>JPEG (Fine, Large)</strong> tercih edilebilir. Ancak unutmayın, Z6 II gibi bir makinenin tüm potansiyelinden faydalanmak için RAW çekmek genellikle daha iyidir.</li>
+                        <li><strong>Her İkisinin de Avantajı İçin: RAW + JPEG (Fine, Large)</strong>. Bu modda makine her deklanşöre bastığınızda hem bir RAW dosyası hem de bir JPEG dosyası kaydeder. RAW dosyasını arşivleme ve ciddi düzenlemeler için saklarken, JPEG dosyasını hızlı önizleme, paylaşım veya temel baskılar için kullanabilirsiniz. Tek dezavantajı, hafıza kartınızın daha çabuk dolmasıdır.</li>
+                    </ul>
+                    <p class="mt-3 leading-relaxed text-base"><strong>Yeni Başlayan Tavsiyesi:</strong> Hafıza kartınız yeterliyse <strong>RAW + JPEG Fine (Large)</strong> modunda çekim yapmaya başlayın. Bu sayede hem RAW formatının esnekliğini öğrenir hem de elinizde hemen kullanabileceğiniz JPEG'ler olur.</p>
+                </div>
+            </section>
+
+            <section id="lens-24-200" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Lensiniz: NIKKOR Z 24-200mm f/4-6.3 VR</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Sahip olduğunuz NIKKOR Z 24-200mm f/4-6.3 VR lens, son derece çok yönlü bir "seyahat zoom" veya "hepsi bir arada" lenstir. Tek bir lensle geniş açıdan telefotoya kadar oldukça geniş bir odak uzaklığı aralığını kapsar, bu da onu manzara, portre, seyahat ve günlük çekimler gibi birçok farklı fotoğrafçılık türü için uygun hale getirir.</p>
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <img src="images/nikkor_z_24_200.jpg" alt="NIKKOR Z 24-200mm f/4-6.3 VR Lens" class="feature-image mx-auto my-5 max-w-lg">
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li>
+                            <strong>Odak Uzaklığı (Focal Length: 24-200mm):</strong> Bu, lensin ne kadar "geniş" bir açıyı görebildiğini veya ne kadar "yakınlaştırabildiğini" (dar bir açıyı ne kadar büyütebildiğini) gösterir.
+                            <ul class="list-circle list-outside ml-6 mt-2 space-y-2">
+                                <li><strong>24mm (Geniş Açı):</strong> Manzaralar, mimari yapılar, iç mekanlar, büyük grup fotoğrafları için idealdir. Sahnenin geniş bir bölümünü kadraja sığdırır ve ferahlık hissi verir.</li>
+                                <li><strong>35mm - 50mm (Standart Açıya Yakın):</strong> İnsan gözünün gördüğüne benzer bir perspektif sunar. Sokak fotoğrafçılığı, genel amaçlı günlük çekimler, belgesel tarzı ve çevresel portreler için çok kullanışlıdır.</li>
+                                <li><strong>70mm - 105mm (Kısa Telefoto / Portre Aralığı):</strong> Klasik portreler için harikadır çünkü konuyu arka plandan hoş bir şekilde ayırmaya (bokeh efekti) ve perspektif bozulmasını minimize etmeye yardımcı olur. Etkinlikler, biraz daha uzaktaki detaylar için de kullanılır.</li>
+                                <li><strong>135mm - 200mm (Orta Telefoto):</strong> Daha uzaktaki konuları yakınlaştırmak için (amatör spor, kontrollü vahşi yaşam, uzaktan çekilen portreler), sahneyi sıkıştırarak katmanlı bir görünüm elde etmek için idealdir.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Diyafram (Aperture: f/4-6.3):</strong> Bu "değişken diyaframlı" bir lenstir. Lensin maksimum diyafram açıklığı, seçtiğiniz odak uzaklığına göre değişir.
+                            <ul class="list-circle list-outside ml-6 mt-2 space-y-1">
+                                <li>24mm odak uzaklığında lensin en geniş (maksimum) diyafram açıklığı f/4'tür.</li>
+                                <li>200mm odak uzaklığına doğru zoom yaptıkça, lensin en geniş diyafram açıklığı kademeli olarak f/6.3'e kadar daralır (yani daha az ışık alır).</li>
+                                <li>Bu, düşük ışık koşullarında telefoto ucunda (örn. 200mm'de f/6.3 ile) çekim yaparken, geniş açı ucuna (örn. 24mm'de f/4 ile) göre daha yüksek ISO değerleri veya daha yavaş enstantane hızları kullanmanız gerekebileceği anlamına gelir.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>VR (Vibration Reduction - Titreşim Azaltma):</strong> Lensin içinde bulunan bir optik görüntü stabilizasyon sistemidir. El titremelerinin neden olduğu bulanıklığı azaltarak, özellikle düşük enstantane hızlarında veya uzun odak uzaklıklarında (telefoto) elde çekim yaparken daha net fotoğraflar çekmenize yardımcı olur. Nikon, bu lens için 5 stop'a kadar titreşim azaltma performansı iddia eder. Makine menüsünden (Fotoğraf Çekimi Menüsü > Optik VR) "Normal" veya "Sport" modları arasında seçim yapılabilir. "Sport" modu, düzensiz ve hızlı hareket eden konuları takip ederken daha etkilidir. Tripod kullanırken genellikle VR'ı kapatmak önerilir, ancak bazı yeni VR sistemleri tripod kullanımını algılayıp ona göre davranabilir; emin değilseniz kapatın.
+                        </li>
+                        <li>
+                            <strong>Zoom Halkası:</strong> Lensin gövdesindeki daha geniş olan halkadır. Bu halkayı çevirerek odak uzaklığını (24mm ile 200mm arasında) değiştirirsiniz.
+                        </li>
+                        <li>
+                            <strong>Kontrol Halkası (Netleme Halkası):</strong> Lensin gövdesindeki daha ince olan halkadır. Varsayılan olarak, AF (Otomatik Netleme) modundayken genellikle bir işlevi yoktur veya manuel netleme için ince ayar yapmanızı sağlar (AF+MF ayarına bağlı). MF (Manuel Netleme) moduna geçtiğinizde ise bu halka ile manuel netleme yaparsınız. Ayrıca, bu kontrol halkasını makine menüsünden (Özel Ayarlar Menüsü > f Kontroller > Özel Kontrol Ataması > Lens Kontrol Halkası) diyafram, ISO, pozlama telafisi gibi farklı bir işleve atayabilirsiniz.
+                        </li>
+                        <li>
+                            <strong>LOCK Düğmesi (Lens Kilidi):</strong> Lens 24mm (en geniş açı) pozisyonundayken, bu düğmeyi "LOCK" konumuna kaydırarak lensin kendi ağırlığıyla istenmeden uzamasını (zoom creep) engelleyebilirsiniz. Bu, lensi taşırken veya makine aşağı doğru sarkarken kullanışlıdır. Çekime başlamadan önce kilidi açmayı unutmayın!
+                        </li>
+                        <li><strong>Minimum Netleme Mesafesi:</strong> Lensin konuya ne kadar yaklaşabileceğini gösterir. Bu lens için odak uzaklığına göre değişir (örn: 24mm'de 0.5m, 200mm'de 1.0m civarı). Makro çekimler için özel bir lens değildir, ancak yine de konulara makul ölçüde yaklaşabilirsiniz.</li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Lensinizi Tanıyın ve Yaratıcılığınızı Kullanın:</h4>
+                    <p class="leading-relaxed text-base">Bu lensin en büyük avantajı sunduğu esnekliktir. Farklı odak uzaklıklarında (24mm, 35mm, 50mm, 85mm, 135mm, 200mm gibi) bol bol fotoğraf çekerek her bir açının konunuza, kompozisyonunuza ve arka planla ilişkisine nasıl etki ettiğini deneyimleyin. Geniş açının sahneye dahil etme gücünü, standart açının doğal perspektifini ve telefotonun konuyu sıkıştırma ve arka planı izole etme yeteneğini keşfedin. Bu, hangi durumda hangi odak uzaklığının istediğiniz görsel etkiyi yaratacağını anlamanıza yardımcı olacaktır.</p>
+                </div>
+            </section>
+
+            <section id="night-photography" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Özel Durum: Gece Çekimi İpuçları</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Gece fotoğrafçılığı, doğru teknikler ve biraz sabırla son derece etkileyici ve büyülü sonuçlar verebilir. Düşük ışık koşulları, uzun pozlamalar ve özel ayarlar gerektirir.</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Adım Adım Gece Çekimi Ayarları:</h3>
+                    
+                    <div class="step">
+                        <h4 class="text-xl font-semibold text-indigo-600">1. Olmazsa Olmaz Ekipman Hazırlığı:</h4>
+                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 text-base">
+                            <li><strong>Sağlam bir Tripod (Üçayak):</strong> KESİNLİKLE GEREKLİ! En ufak bir sarsıntı bile uzun pozlamalarda fotoğrafınızı tamamen bulanıklaştırır. Rüzgarlı havalarda ağırlık asabileceğiniz (örn: fotoğraf çantanız) bir kancası olan tripodlar daha stabildir.</li>
+                            <li><strong>Uzaktan Kumanda veya Zamanlayıcı:</strong> Deklanşöre basarken oluşabilecek titreşimi önlemek için.
+                                <ul class="list-circle list-outside ml-6 mt-1 space-y-1">
+                                    <li><strong>Makinenin Kendi Zamanlayıcısı:</strong> En basit çözüm. 2 veya 10 saniyelik zamanlayıcıyı ayarlayın (Özel Ayarlar Menüsü > c ZamanÖlç/AE Kilidi > Otomatik zamanlama).</li>
+                                    <li><strong>Kablolu Uzaktan Kumanda (örn: Nikon MC-DC2):</strong> Bulb modunda 30 saniyeden uzun pozlamalar için idealdir.</li>
+                                    <li><strong>Kablosuz Uzaktan Kumanda (örn: Nikon ML-L7 Bluetooth kumanda):</strong> Makineye dokunmadan çekim yapmanızı sağlar. Telefonunuzu Nikon SnapBridge uygulamasıyla uzaktan kumanda olarak da kullanabilirsiniz.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Tam Dolu Batarya (ve mümkünse yedek):</strong> Uzun pozlamalar ve soğuk hava bataryayı normalden çok daha çabuk tüketir.</li>
+                            <li><strong>Boş ve Hızlı Hafıza Kartı:</strong> Özellikle RAW formatında ve uzun pozlama kumlanma azaltma (Long Exposure NR) açıkken büyük dosyalar oluşur.</li>
+                            <li><strong>Fener (Tercihen Kırmızı Işık Modlu Kafa Lambası):</strong> Ayarları görmek, ekipmanı düzenlemek ve etrafta güvenle dolaşmak için. Kırmızı ışık, gözlerinizin karanlığa adaptasyonunu daha az bozar, bu da yıldızları veya loş ortamları daha iyi görmenizi sağlar.</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4 class="text-xl font-semibold text-indigo-600">2. Temel Kamera Ayarları:</h4>
+                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 text-base">
+                            <li><strong>Çekim Modu: M (Manuel Mod)</strong>. Diyafram, enstantane ve ISO üzerinde tam ve bağımsız kontrol sağlar.</li>
+                            <li><strong>Görüntü Kalitesi: RAW (.NEF)</strong>. Düzenleme aşamasında renkleri, pozlamayı, beyaz dengesini ve detayları kurtarmak için maksimum esneklik sağlar. Gece çekimlerinde bu esneklik çok değerlidir.</li>
+                            <li><strong>VR (Titreşim Azaltma / Optik VR): KAPALI</strong>. Makine tripoda sabitlendiğinde VR sistemi gereksiz yere çalışıp hafif bulanıklığa veya "sürüklenmeye" neden olabilir (Fotoğraf Çekimi Menüsü > Optik VR > Kapalı).</li>
+                            <li><strong>ISO: Mümkün Olan En Düşük Değerle Başlayın (örn: ISO 64, 100, 200)</strong>. Amacınız her zaman en temiz, en az gürültülü görüntüyü elde etmektir. Gerekirse (çok uzun enstantane sürelerinden kaçınmak, yıldızları daha parlak yakalamak veya hareketi dondurmak için) yavaş yavaş artırın. Z6 II, yüksek ISO'larda bile iyi performans verir, ancak kumlanmayı minimumda tutmak için ISO'yu son çare olarak yükseltin.</li>
+                            <li><strong>Beyaz Dengesi (WB):</strong>
+                                <ul class="list-circle list-outside ml-6 mt-1 space-y-1">
+                                    <li><strong>AUTO WB:</strong> RAW çekiyorsanız genellikle iyi bir başlangıç noktasıdır, sonradan kolayca düzeltebilirsiniz.</li>
+                                    <li><strong>Kelvin (K):</strong> Şehir ışıkları için genellikle 2800K-4000K arası (sodyum lambalar daha düşük, LED'ler daha yüksek olabilir), yıldızlar/Samanyolu için 3800K-4500K arası (daha mavi bir gökyüzü için daha düşük, daha nötr için daha yüksek) denenebilir. Bu, ışık kaynağına ve istediğiniz sanatsal efekte göre değişir.</li>
+                                    <li><strong>Akkor Lamba (Incandescent) veya Floresan:</strong> Yapay ışık kaynaklarının renk kaymalarını dengelemek için kullanılabilir.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Uzun Pozlama Kumlanma Azaltma (Long Exp. NR):</strong> Menüde bulunur (Fotoğraf Çekimi Menüsü > Uzun Poz. KA). "AÇIK" olduğunda, makine asıl pozlamadan sonra aynı sürede bir "karanlık kare" (dark frame) daha çeker ve bu kareyi kullanarak sıcak pikselleri (hot pixels) ve bazı kumlanma türlerini azaltır. Çekim süresini iki katına çıkarır (örn: 30sn pozlama + 30sn NR = toplam 1 dakika). Çok uzun pozlamalarda (birkaç dakikadan fazla) veya sıcak havalarda faydalı olabilir. Daha kısa pozlamalarda (30sn altı) genellikle kapalı tutulabilir ve kumlanma yazılımla daha kontrollü giderilebilir.</li>
+                            <li><strong>Yüksek ISO Kumlanma Azaltma (High ISO NR):</strong> Düşük veya Kapalı ayarında tutulabilir (Fotoğraf Çekimi Menüsü > Yüksek ISO KA). RAW çekiyorsanız bu işlemi düzenleme yazılımında yapmak genellikle daha iyi ve daha fazla kontrol sağlar.</li>
+                            <li><strong>Sessiz Fotoğrafçılık:</strong> Genellikle KAPALI. Uzun pozlamalarda mekanik deklanşör daha güvenilirdir. Elektronik deklanşör çok uzun pozlamalarda bazı artefaktlara (rolling shutter etkisi, banding) neden olabilir. Ancak titreşimi tamamen ortadan kaldırmak için bazı durumlarda (örn: çok hassas makro) denenebilir.</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4 class="text-xl font-semibold text-indigo-600">3. Lens ve Pozlama Ayarları (Diyafram & Enstantane):</h4>
+                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 text-base">
+                            <li><strong>Diyafram (Aperture):</strong>
+                                <ul class="list-circle list-outside ml-6 mt-1 space-y-1">
+                                    <li><strong>Manzara / Şehir Işıkları / Yıldız Patlaması Efekti (Sunstars):</strong> f/8 - f/13 arası. Bu aralık genellikle lenslerin en keskin olduğu (sweet spot) ve diyafram bıçaklarının şekline bağlı olarak ışık kaynaklarından hoş yıldız ışını efektleri verdiği değerlerdir.</li>
+                                    <li><strong>Yıldızlar / Samanyolu (Maksimum Işık Toplama):</strong> Lensinizin izin verdiği en geniş diyaframı kullanın (örn: 24-200mm lensinizde 24mm odak uzaklığında f/4, 50mm'de f/5 civarı). Amaç, mümkün olduğunca fazla sönük yıldız ışığını kısa sürede toplamaktır.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Enstantane Hızı (Shutter Speed):</strong> Bu, ne çektiğinize, ne kadar ışık olduğuna ve istediğiniz efekte bağlı olarak büyük ölçüde değişir. Deneme yanılma esastır.
+                                <ul class="list-circle list-outside ml-6 mt-1 space-y-1">
+                                    <li><strong>Şehir Manzaraları, Işık İzleri (Araba Farları vb.):</strong> 5 saniye ile 30 saniye arası bir değerle başlayın. Histogramı kontrol ederek ve istediğiniz ışık izi uzunluğuna göre ayarlayın. Gerekirse Bulb modu (B modu, mod kadranında M'den sonra gelir veya M modunda enstantaneyi 30 saniyenin ötesine alarak ulaşılır) ile 30 saniyeden çok daha uzun pozlamalar yapabilirsiniz (uzaktan kumanda ile kontrol edilir).</li>
+                                    <li><strong>Ay Fotoğrafı:</strong> Ay şaşırtıcı derecede parlaktır! "Looney 11 Kuralı" (f/11 diyaframda, enstantane hızı 1/ISO değerine eşit olacak şekilde, örn: f/11, ISO 100, 1/100sn) iyi bir başlangıç noktası olabilir. Genellikle ISO 100-200, f/8-f/11, 1/60sn - 1/250sn gibi ayarlar işe yarar. Telefoto odak uzaklığı kullanın.</li>
+                                    <li><strong>Yıldızlar/Samanyolu (Yıldızları Nokta Gibi Yakalamak İçin):</strong> Yıldızların dünyanın dönüşü nedeniyle çizgi (star trails) gibi görünmesini engellemek için maksimum pozlama süresini hesaplamanız gerekir. Basitleştirilmiş <strong>"500 Kuralı"</strong> yaygın olarak kullanılır:
+                                        <code class="block bg-gray-200 p-2 rounded text-sm my-1">Maksimum Enstantane (saniye) = 500 / (Kamera Kırpma Faktörü * Lensin Odak Uzaklığı (mm))</code>
+                                        Nikon Z6 II full frame bir makine olduğu için kırpma faktörü 1'dir.
+                                        Örneğin, 24mm lens için: 500 / (1 * 24mm) ≈ 20.8 saniye. Yani yaklaşık 20 saniyeyi geçmemeye çalışın.
+                                        35mm lens için: 500 / 35mm ≈ 14 saniye.
+                                        <em>Not:</em> Bu kural bir genellemedir. Daha hassas sonuçlar için "NPF Kuralı"nı (N=Diyafram, P=Piksel Aralığı, F=Odak Uzaklığı) araştırın. PhotoPills gibi mobil uygulamalar bu hesaplamaları sizin için yapar.</li>
+                                    <li><strong>Yıldız İzleri (Star Trails):</strong> Yıldızların gökyüzünde uzun çizgiler halinde görünmesini istiyorsanız, çok daha uzun pozlamalar (birkaç dakikadan saatlere kadar) veya birden fazla kısa pozlamayı (örn: her biri 30 saniye olan 100 fotoğraf) birleştirme tekniği (stacking) kullanılır.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="step">
+                        <h4 class="text-xl font-semibold text-indigo-600">4. Hassas Netleme (Focusing):</h4>
+                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 text-base">
+                            <li><strong>Kesinlikle Manuel Netleme (MF) Kullanın.</strong> Otomatik netleme (AF) düşük ışıkta genellikle doğru çalışmaz, "avlanır" (hunting yapar) veya yanlış bir yere netleyebilir.</li>
+                            <li><strong>Manuel Netleme Yöntemi:</strong>
+                                <ol class="list-decimal list-outside ml-6 mt-1 space-y-1">
+                                    <li>Makinenizi ve lensinizi MF moduna alın (lenste AF/MF düğmesi varsa MF'ye, yoksa makine menüsünden veya 'i' menüsünden Netleme Modu'nu MF olarak ayarlayın).</li>
+                                    <li>Canlı İzleme'yi (Live View - LCD ekran) açın.</li>
+                                    <li>Kadrajınızda mümkün olan en uzaktaki parlak bir ışık kaynağını bulun (parlak bir yıldız, gezegen, uzak bir şehir ışığı, ay).</li>
+                                    <li>LCD ekrandaki Yakınlaştırma (+) tuşuna (genellikle arka paneldeki büyüteç+ simgeli tuş) birkaç kez basarak o parlak noktayı ekranda maksimum seviyede (örn: %100 veya %200) büyütün.</li>
+                                    <li>Lensin netleme halkasını (kontrol halkasını netlemeye atadıysanız onu) çok yavaşça çevirerek büyütülmüş ışık noktasının en küçük, en keskin ve en parlak hale gelmesini sağlayın. Yıldızlar için, en küçük nokta genellikle doğru netlemedir.</li>
+                                    <li>Netlemeyi yaptıktan sonra netleme halkasına yanlışlıkla dokunmamaya çok dikkat edin. Bazı fotoğrafçılar kritik çekimlerde netleme halkasını o pozisyonda hassas bir bantla (gaffer tape gibi) sabitlerler.</li>
+                                    <li><strong>Netleme Yardımı (Focus Peaking):</strong> Makinenizin menüsünden (Özel Ayarlar Menüsü > d Görüntüleme > Netleme yardımı) bu özelliği açabilirsiniz. Net olan kenarları seçtiğiniz bir renkte (örn: kırmızı, sarı, mavi) vurgular, bu da MF yaparken çok yardımcı olur. Hassasiyetini ve rengini ayarlayabilirsiniz.</li>
+                                    <li><strong>Sonsuz (∞) İşareti:</strong> Lenslerin üzerindeki sonsuz işareti genellikle gece çekimlerinde iyi bir başlangıç noktasıdır ama her zaman tam olarak doğru netlemeyi vermeyebilir (özellikle zoom lenslerde veya sıcaklık değişimlerinde). Her zaman canlı izlemede büyütülmüş görüntü ile teyit edin.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4 class="text-xl font-semibold text-indigo-600">5. Çekim, Kontrol ve Tekrar:</h4>
+                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 text-base">
+                            <li>Kompozisyonunuzu dikkatlice yapın. Ufuk çizgisinin düz olduğundan emin olun (sanal ufuk yardımcısını kullanın).</li>
+                            <li>2 veya 10 saniyelik zamanlayıcıyı ayarlayın ya da uzaktan kumandayı kullanın.</li>
+                            <li>Deklanşöre basın ve pozlama süresince makineye ve tripoda KESİNLİKLE dokunmayın. Rüzgarlıysa, rüzgarın kesilmesini bekleyin veya vücudunuzla siper olun.</li>
+                            <li>Çekim bittikten sonra fotoğrafı LCD ekranda kontrol edin. %100 yakınlaştırarak (+) netliği (özellikle yıldızların nokta gibi olup olmadığını) kontrol edin.</li>
+                            <li><strong>Histogramı İnceleyin:</strong> DISP tuşuna birkaç kez basarak histogramı görüntüleyin. Histogram, fotoğrafınızdaki ton dağılımını (gölgeler, orta tonlar, parlak alanlar) gösterir. Gece çekimlerinde histogram genellikle sola doğru (gölgelere doğru) yığılır, bu normaldir. Ancak, grafiğin tamamen sol duvara yapışmamasına (siyahların tamamen kaybolmaması) veya önemli parlak alanların (örn: ay, parlak şehir ışıkları) sağ duvara yapışıp patlamamasına (beyazların tamamen kaybolmaması) dikkat edin.</li>
+                            <li>Gerekirse diyafram, enstantane veya ISO ayarlarınızı histogram ve görsel değerlendirmenize göre (çok karanlıksa enstantaneyi uzatın veya ISO'yu biraz artırın; çok aydınlıksa tersini yapın) değiştirip tekrar çekin. Gece fotoğrafçılığı sabır ve deneme yanılma işidir!</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 bg-sky-50 border-l-4 border-sky-500 text-sky-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Gece Çekiminde Ekstra İpuçları ve Önemli Notlar:</h4>
+                    <ul class="list-disc list-outside mt-2 space-y-2 pl-5 text-base leading-relaxed">
+                        <li><strong>Sabırlı Olun ve Deneyin:</strong> Gece fotoğrafçılığı bolca deneme yanılma gerektirir. İlk denemede mükemmel sonuç beklemeyin. Her çekimden sonra ayarlarınızı not alın veya EXIF bilgilerini inceleyin.</li>
+                        <li><strong>Hava Durumunu ve Ay Takvimini Kontrol Edin:</strong> Açık, bulutsuz bir gökyüzü yıldız fotoğrafçılığı için idealdir. Ayın evresi de önemlidir; dolunay zamanı gökyüzü çok parlak olacağı için sönük yıldızları ve Samanyolu'nu görmek zorlaşır, ancak ay ışığıyla aydınlatılmış manzaralar için harikadır. Yeniay zamanı ise Samanyolu için en uygun zamandır.</li>
+                        <li><strong>Işık Kirliliğinden Uzaklaşın:</strong> Özellikle derin uzay objeleri, Samanyolu veya sönük yıldızları çekmek istiyorsanız, şehir ışıklarından olabildiğince uzak, karanlık bölgeler (ışık kirliliği haritalarını kontrol edin, örn: lightpollutionmap.info) en iyi sonuçları verir.</li>
+                        <li><strong>Gözlerinizin Karanlığa Alışmasına İzin Verin:</strong> Tamamen karanlık bir ortama geldiğinizde gözlerinizin karanlığa tam olarak adapte olması 15-30 dakika sürebilir. Bu süre zarfında parlak ışıklara (özellikle telefonunuzun beyaz ekranına) bakmaktan kaçının. Kırmızı ışıklı fener bu yüzden önemlidir.</li>
+                        <li><strong>Lens Buğulanması (Dew):</strong> Özellikle nemli ve serin gecelerde lensinizin ön camı buğulanabilir (çiğ oluşumu). Bu, fotoğraflarınızı mahveder. Bunu önlemek için lens ısıtıcıları (USB ile çalışan küçük ısıtıcı şeritler) kullanabilir veya periyodik olarak (çok dikkatlice, temiz mikrofiber bezle) lensinizi silebilirsiniz. Lens kapağını kullanmadığınız zamanlarda takılı tutmak da yardımcı olabilir.</li>
+                        <li><strong>Kompozisyona Önem Verin:</strong> Sadece gökyüzünü çekmek yerine, ön planda ilginç bir siluet, bir ağaç, bir dağ, bir kaya oluşumu, bir yapı gibi elementler ekleyerek fotoğrafınıza derinlik, ölçek ve ilgi katın.</li>
+                        <li><strong>Makine Ayarlarını Kaydetme (U1, U2, U3):</strong> Sık kullandığınız gece çekimi ayarlarını (M modu, belirli bir ISO, WB, NR ayarları vb.) kullanıcı modlarından birine kaydederek bir sonraki sefere hızlıca bu ayarlara dönebilirsiniz.</li>
+                    </ul>
+                </div>
+            </section>
+
+             <section id="menu-overview" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Menüye Genel Bakış</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Nikon Z6 II'nin menüsü oldukça kapsamlıdır ve makinenizin neredeyse her yönünü özelleştirmenize olanak tanır. MENU tuşuna basarak erişebilirsiniz. İşte ana menü sekmeleri ve her birinde bulabileceğiniz sık kullanılan bazı önemli ayarlar:</p>
+                
+                <div class="bg-white p-8 rounded-xl shadow-xl space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-sky-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" /></svg>
+                            Oynatma Menüsü (► Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Çektiğiniz fotoğrafları ve videoları yönetmek için kullanılır.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>Oynatma klasörü:</strong> Hangi klasördeki görüntülerin gösterileceğini seçer.</li>
+                            <li><strong>Oynatma ekranı seçenekleri:</strong> Oynatma sırasında DISP tuşuna basıldığında hangi bilgilerin (histogram, detaylı çekim verileri vb.) gösterileceğini ayarlar.</li>
+                            <li><strong>Görüntü inceleme:</strong> Çekimden hemen sonra fotoğrafın LCD'de gösterilip gösterilmeyeceğini ve ne kadar süreyle kalacağını ayarlar.</li>
+                            <li><strong>Döndür (uzun):</strong> Dikey çekilen fotoğrafların oynatma sırasında otomatik döndürülmesini sağlar.</li>
+                            <li><strong>Slayt gösterisi:</strong> Fotoğraflarınızı slayt gösterisi olarak oynatır.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-green-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM2 12a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2z" /></svg>
+                            Fotoğraf Çekimi Menüsü (Fotoğraf Makinesi Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Fotoğraf çekimiyle ilgili temel ve ileri düzey ayarları içerir.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>Görüntü kalitesi:</strong> RAW (NEF), JPEG veya RAW+JPEG seçimi.</li>
+                            <li><strong>Görüntü boyutu:</strong> JPEG için Large (L), Medium (M), Small (S) seçimi. RAW için de farklı sıkıştırma ve bit derinliği seçenekleri olabilir.</li>
+                            <li><strong>ISO duyarlılığı ayarları:</strong> ISO değeri, Otomatik ISO kontrolü (maksimum duyarlılık, minimum enstantane hızı).</li>
+                            <li><strong>Beyaz dengesi:</strong> AUTO, Güneşli, Gölge, K (Kelvin) vb. beyaz dengesi ön ayarları.</li>
+                            <li><strong>Picture Control Ayarla:</strong> Standart, Nötr, Canlı, Monokrom gibi renk ve ton profilleri (JPEG'e ve video önizlemesine doğrudan etki eder, RAW için başlangıç noktasıdır).</li>
+                            <li><strong>Renk uzayı:</strong> sRGB veya Adobe RGB.</li>
+                            <li><strong>Etkin D-Lighting:</strong> Yüksek kontrastlı sahnelerde gölge ve parlak alanlardaki detayları dengelemeye çalışır (JPEG'e etki eder).</li>
+                            <li><strong>Uzun Poz. KA (Kumlanma Azaltma), Yüksek ISO KA.</strong></li>
+                            <li><strong>Netleme modu (AF-S, AF-C, MF), AF alanı modu.</strong></li>
+                            <li><strong>Optik VR (Titreşim Azaltma):</strong> Lensdeki titreşim azaltma sisteminin ayarları.</li>
+                            <li><strong>Otomatik basamaklama:</strong> Pozlama, flaş, WB veya ADL için farklı değerlerde seri çekim yapar.</li>
+                            <li><strong>Çoklu pozlama, Aralıklı çekim (Time-lapse).</strong></li>
+                        </ul>
+                    </div>
+
+                     <div>
+                        <h3 class="text-2xl font-semibold text-red-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 2h6v4H7V5zm8 8H5v-2h10v2z" clip-rule="evenodd" /></svg>
+                            Video Çekimi Menüsü (Video Kamera Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Video kaydıyla ilgili tüm ayarları içerir.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>Kare boyutu/kare sayısı:</strong> Video çözünürlüğü (4K UHD, Full HD) ve saniyedeki kare sayısı (fps - 24p, 30p, 60p, 120p vb.).</li>
+                            <li><strong>Film kalitesi:</strong> Yüksek kalite veya Normal.</li>
+                            <li><strong>Film dosyası türü:</strong> MOV veya MP4.</li>
+                            <li><strong>ISO duyarlılığı ayarları (M modu):</strong> Video için ISO ayarları.</li>
+                            <li><strong>Beyaz dengesi, Picture Control Ayarla (video için).</strong></li>
+                            <li><strong>Mikrofon duyarlılığı:</strong> Dahili veya harici mikrofonun ses kayıt seviyesi.</li>
+                            <li><strong>Frekans tepkisi, Rüzgar gürültüsü azaltma.</strong></li>
+                            <li><strong>N-Log/HDR (HLG) ayarları (harici kayıt için):</strong> Geniş dinamik aralık ve renk gamı için video formatları.</li>
+                            <li><strong>Zaman kodu.</strong></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
+                            Özel Ayarlar Menüsü (Kalem Simgesi - a'dan g'ye alt bölümler)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Makinenin davranışını ve kontrollerini çok detaylı bir şekilde kişiselleştirebileceğiniz yer. Bu menüde kaybolmak kolaydır, bu yüzden ne yaptığınızdan emin olun!</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>a - Otomatik Netleme:</strong> AF-C/AF-S öncelik seçimi, netleme noktası sayısı, AF konu algılama seçenekleri (insan/hayvan), AF etkinleştirme (AF-ON only vb.), netleme noktası sarmalama.</li>
+                            <li><strong>b - Ölçüm/Pozlama:</strong> Pozlama telafisi adım değeri (1/3 veya 1/2 EV).</li>
+                            <li><strong>c - SüreÖlç/AE Kilidi:</strong> Otomatik kapanma süreleri (bekleme zamanlayıcısı, monitör kapanma), deklanşör AE-L (pozlama kilidi) ayarı.</li>
+                            <li><strong>d - Görüntüleme:</strong> Bilgi ekranı seçenekleri, vizör ekran seçenekleri, netleme yardımı (focus peaking), sanal ufuk.</li>
+                            <li><strong>e - Basamaklama/Flaş:</strong> Flaş senkron hızı, flaş kontrolü.</li>
+                            <li><strong>f - Kontroller:</strong> Tuşlara fonksiyon atama (Fn1, Fn2, AF-ON, lens kontrol halkası, joystick merkezi vb.). <strong>Bu bölüm makinenizi kendinize göre kişiselleştirmek için çok önemlidir!</strong></li>
+                            <li><strong>g - Video:</strong> Video için özel kontrol atamaları ve diğer ince ayarlar.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-orange-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.566.379-1.566 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.566 2.6 1.566 2.978 0a1.532 1.532 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01-.947-2.287c1.566-.379-1.566-2.6 0-2.978a1.532 1.532 0 01.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
+                            Kurulum Menüsü (İngiliz Anahtarı Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Makinenin temel işleyişi ve genel ayarlarıyla ilgilidir.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>Hafıza Kartını Formatla:</strong> Kartı kullanmadan önce veya periyodik olarak formatlamak iyi bir pratiktir (TÜM VERİLERİ SİLER!).</li>
+                            <li><strong>Kullanıcı Ayarlarını Kaydet/Sıfırla (U1, U2, U3 için).</strong></li>
+                            <li><strong>Dil (Language), Saat Dilimi ve Tarih.</strong></li>
+                            <li><strong>Monitör Parlaklığı/Renk Dengesi, Vizör Parlaklığı/Renk Dengesi.</strong></li>
+                            <li><strong>Sensör Temizleme:</strong> Görüntü sensörünü tozdan temizlemek için (hemen temizle veya başlangıçta/kapanışta temizle).</li>
+                            <li><strong>Görüntü Yorumu, Telif Hakkı Bilgisi.</strong></li>
+                            <li><strong>USB Bağlantı Modu, HDMI ayarları.</strong></li>
+                            <li><strong>Ürün Yazılımı Sürümü:</strong> Makinenizin yazılımını güncel tutmak için kontrol edin. Nikon'un web sitesinden yeni sürümleri takip edebilirsiniz.</li>
+                            <li><strong>Tüm Ayarları Sıfırla.</strong></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-lime-600 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg>
+                            Rötuş Menüsü (Fırça Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Çekilen JPEG fotoğraflar üzerinde makine içinde basit düzenlemeler yapmanızı sağlar.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>NEF (RAW) işleme:</strong> RAW dosyalarını makinede JPEG'e dönüştürürken bazı ayarları (WB, Picture Control, Pozlama Telafisi vb.) değiştirme.</li>
+                            <li><strong>Kırpma, Yeniden Boyutlandırma.</strong></li>
+                            <li><strong>D-Lighting, Kırmızı Göz Düzeltme.</strong></li>
+                            <li><strong>Filtre Efektleri.</strong></li>
+                            <li class="text-sm italic">Genellikle bu tür düzenlemeleri bilgisayarda özel yazılımlarla yapmak daha fazla kontrol ve daha iyi sonuçlar verir.</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-yellow-500 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                             Benim Menüm / Son Ayarlar (Yıldız veya Kalp Simgesi)
+                        </h3>
+                        <p class="text-gray-600 text-base ml-9">Sık kullandığınız menü öğelerini buraya ekleyerek kendi kişisel menünüzü oluşturabilir ve bu ayarlara çok daha hızlı erişebilirsiniz.</p>
+                        <ul class="list-disc list-outside space-y-1 text-gray-600 pl-14 text-base mt-2">
+                            <li><strong>Sekme Ekle/Sil/Sırala:</strong> Benim Menüm'e istediğiniz menü öğelerini ekleyebilir, sıralamasını değiştirebilirsiniz.</li>
+                            <li><strong>Son Ayarlar:</strong> Makine en son kullandığınız menü öğelerini burada listeleyebilir.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 bg-teal-50 border-l-4 border-teal-500 text-teal-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">Menüde Gezinme İpuçları:</h4>
+                    <ul class="list-disc list-outside mt-2 space-y-2 pl-5 text-base leading-relaxed">
+                        <li><strong>Navigasyon:</strong> Menülerde gezinmek için Çoklu Seçiciyi (D-pad - yukarı/aşağı/sağa/sola) ve Alt Seçiciyi (Joystick) kullanın. Bir menü öğesini seçmek veya bir alt menüye girmek için Çoklu Seçicinin sağ yönüne veya OK tuşuna basın. Geri çıkmak için sol yönüne basın.</li>
+                        <li><strong>OK Tuşu:</strong> Seçimleri onaylamak ve ayar ekranlarına girmek için kullanılır.</li>
+                        <li><strong>Dokunmatik Ekran:</strong> Menülerde gezinmek ve ayarları seçmek için dokunmatik ekranı da kullanabilirsiniz.</li>
+                        <li><strong>Yardım (?) Düğmesi:</strong> Bir menü öğesi vurguluyken Yakınlaştırma (-) / Yardım (?) Düğmesine basarsanız, o ayar hakkında kısa bir açıklama alabilirsiniz. Bu, özellikle yeni başlayanlar için çok faydalıdır.</li>
+                        <li><strong>'i' Düğmesi:</strong> Ana menüye girmeden sık kullanılan ayarlara erişmek için 'i' düğmesini kullanın. Bu menüyü kendi ihtiyaçlarınıza göre özelleştirebilirsiniz (Özel Ayarlar Menüsü > f Kontroller > 'i' Menüsünü Özelleştir).</li>
+                        <li><strong>Başlangıçta Her Şeyi Kurcalamayın:</strong> Menüdeki ayar sayısı baş döndürücü olabilir. Başlangıçta temel olanlara (Görüntü Kalitesi, ISO, WB, Netleme Modları, AF Alan Modları) odaklanın. Zamanla ve ihtiyaç duydukça diğerlerini keşfedin.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="tips" class="content-section space-y-8">
+                <h2 class="text-4xl font-semibold text-indigo-700 border-b-2 border-indigo-300 pb-3 mb-8">Ek İpuçları ve Sonraki Adımlar</h2>
+                <p class="text-lg leading-relaxed text-gray-700">Nikon Z6 II'nizle fotoğrafçılık yolculuğunuzda size yardımcı olacak bazı ek ipuçları ve öğrenme sürecinizi devam ettirmek için atabileceğiniz sonraki adımlar:</p>
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <ul class="list-disc list-outside space-y-4 text-gray-600 pl-5 text-base">
+                        <li>
+                            <strong>Kullanım Kılavuzunu İhmal Etmeyin:</strong> Bu rehber iyi bir başlangıç noktası olsa da, makinenizin tüm özelliklerini ve inceliklerini öğrenmek için Nikon'un resmi kullanım kılavuzunu (genellikle kutu içeriğinde gelir veya Nikon'un web sitesinden PDF olarak indirilebilir) detaylıca incelemenizi şiddetle tavsiye ederim. Orada her ayarın ayrıntılı açıklamalarını bulabilirsiniz.
+                        </li>
+                        <li>
+                            <strong>Bol Bol Pratik Yapın, Çekin, Çekin, Çekin!:</strong> Fotoğrafçılığı öğrenmenin en iyi yolu pratik yapmaktır. Farklı ışık koşullarında, farklı konularla, farklı ayarları deneyerek çekim yapın. Hata yapmaktan korkmayın; her hata yeni bir öğrenme fırsatıdır. Sonuçları gözlemleyin, neyin işe yarayıp neyin yaramadığını analiz edin.
+                        </li>
+                        <li>
+                            <strong>Kompozisyon Kurallarını Öğrenin (ve Sonra Kırın):</strong> İyi bir fotoğraf sadece teknik ayarlardan ibaret değildir; güçlü bir kompozisyon da çok önemlidir. Üçler kuralı (rule of thirds), yönlendirici çizgiler (leading lines), simetri, negatif alan, kadraj içinde kadraj (framing) gibi temel kompozisyon kurallarını öğrenin ve uygulayın. Zamanla, bu kuralları bilinçli bir şekilde kırmayı da öğrenebilirsiniz.
+                        </li>
+                        <li>
+                            <strong>Fotoğraflarınızı Eleştirel Bir Gözle İnceleyin:</strong> Çektiğiniz fotoğrafları bilgisayar ekranında büyük boyutta (veya baskı alarak) inceleyin. Neleri doğru yaptığınızı, neleri geliştirebileceğinizi (netlik, pozlama, kompozisyon, renkler vb.) dürüstçe değerlendirin. Başkalarının (güvendiğiniz fotoğrafçı arkadaşlarınızın veya online toplulukların) yapıcı eleştirilerini de dikkate alın.
+                        </li>
+                        <li>
+                            <strong>İlham Alın, Ama Kopyalamayın:</strong> Diğer fotoğrafçıların çalışmalarını (Instagram, Flickr, 500px, fotoğraf kitapları, sergiler vb.) inceleyin. Hoşunuza giden tarzları, teknikleri ve konuları analiz edin. Bu size yeni fikirler verebilir ve kendi vizyonunuzu geliştirmenize yardımcı olabilir. Ancak amaç kopyalamak değil, ilham alarak kendi özgün tarzınızı bulmaktır.
+                        </li>
+                        <li>
+                            <strong>Temel Düzenleme Yazılımlarını Öğrenin:</strong> Özellikle RAW formatında çekiyorsanız, fotoğraflarınızı "işlemek" (develop) için bir düzenleme yazılımı kullanmanız gerekecektir. Adobe Lightroom Classic/CC, Capture One, DxO PhotoLab veya Nikon'un ücretsiz NX Studio yazılımı gibi popüler seçenekleri araştırmaya başlayın. Temel pozlama, renk, keskinlik ayarlarını ve kırpma gibi işlemleri öğrenmek fotoğraflarınızın potansiyelini ortaya çıkaracaktır.
+                        </li>
+                        <li>
+                            <strong>Elektronik Vizörün (EVF) Gücünü Kullanın:</strong> Nikon Z6 II'nin yüksek çözünürlüklü EVF'i, yaptığınız ayarların (pozlama, beyaz dengesi, Picture Control, alan derinliği önizlemesi vb.) son fotoğrafa nasıl etki edeceğini çekim yapmadan önce canlı olarak görmenizi sağlar. Bu, DSLR'lerdeki optik vizörlere göre büyük bir avantajdır. Bu "What You See Is What You Get" (WYSIWYG - Ne Görürsen Onu Alırsın) özelliğini aktif olarak kullanın.
+                        </li>
+                        <li>
+                            <strong>Sessiz Çekim Modunu Keşfedin:</strong> Makinenizin menüsünden (Fotoğraf Çekimi Menüsü > Sessiz fotoğrafçılık > Açık) elektronik deklanşörü kullanarak tamamen sessiz çekim yapabilirsiniz. Bu, vahşi yaşam, sokak fotoğrafçılığı, tiyatro, konser veya sessizlik gerektiren diğer ortamlarda çok kullanışlıdır. Ancak, hızlı hareket eden konularda "rolling shutter" etkisine veya bazı yapay ışık kaynakları altında "banding" (şeritlenme) sorununa neden olabileceğini unutmayın.
+                        </li>
+                        <li>
+                            <strong>Fn Tuşlarını ve Kontrolleri Kişiselleştirin:</strong> Özel Ayarlar Menüsü > f Kontroller > Özel Düğme Atamaları bölümünden Fn1, Fn2, AF-ON, lens kontrol halkası ve diğer bazı tuşlara sık kullandığınız işlevleri atayarak makinenizi kendi çekim tarzınıza ve ihtiyaçlarınıza göre kişiselleştirin. Bu, iş akışınızı hızlandırabilir.
+                        </li>
+                        <li>
+                            <strong>Firmware (Ürün Yazılımı) Güncellemelerini Takip Edin:</strong> Nikon, zaman zaman fotoğraf makineleri için yeni özellikler ekleyen, performansı artıran veya hataları düzelten firmware güncellemeleri yayınlar. Nikon'un resmi web sitesinden Z6 II için yayınlanmış güncellemeleri periyodik olarak kontrol edin ve talimatlara uyarak makinenizin yazılımını güncel tutun.
+                        </li>
+                        <li>
+                            <strong>Fotoğraf Topluluklarına Katılın:</strong> Online forumlar, sosyal medya grupları veya yerel fotoğraf kulüpleri aracılığıyla diğer fotoğrafçılarla etkileşimde bulunun. Bilgi ve deneyim paylaşımı, öğrenme sürecinizi hızlandırabilir ve yeni perspektifler kazandırabilir.
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-8 bg-green-50 border-l-4 border-green-500 text-green-800 p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold text-xl mb-2">En Önemlisi: Fotoğrafçılıktan Keyif Alın!</h4>
+                    <p class="leading-relaxed text-base">Bu bir yolculuk, bir keşif süreci. Öğrenmeye açık olun, denemekten çekinmeyin, yaratıcılığınızı serbest bırakın ve en önemlisi, bu harika hobi veya meslekten keyif alın. Nikon Z6 II, size bu yolda eşlik edecek güçlü bir araçtır.</p>
+                </div>
+            </section>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    const contentSections = document.querySelectorAll('.content-section');
+                    const mainContentArea = document.querySelector('main.flex-1');
+
+                    function setActiveSection(hash) {
+                        let sectionFound = false;
+                        let firstSectionId = contentSections.length > 0 ? '#' + contentSections[0].id : '';
+
+                        if (!hash || !document.querySelector(hash)) {
+                            hash = firstSectionId;
+                        }
+                        
+                        contentSections.forEach(section => {
+                            if ('#' + section.id === hash) {
+                                section.classList.add('active');
+                                sectionFound = true;
+                            } else {
+                                section.classList.remove('active');
+                            }
+                        });
+
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === hash) {
+                                link.classList.add('active');
+                                link.classList.remove('active-initial'); 
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                        
+                        if (mainContentArea) {
+                            mainContentArea.scrollTop = 0; 
+                        }
+                    }
+
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute('href');
+                            if (window.location.hash !== targetId) { 
+                                window.location.hash = targetId; 
+                            } else { 
+                                setActiveSection(targetId);
+                            }
+                        });
+                    });
+
+                    function handleHashChange() {
+                        let currentHash = window.location.hash;
+                        if (!currentHash && navLinks.length > 0) {
+                            const firstLinkHref = navLinks[0].getAttribute('href');
+                            navLinks[0].classList.add('active-initial'); 
+                             setActiveSection(firstLinkHref); 
+                             if (window.location.hash !== firstLinkHref) { 
+                                history.replaceState(null, null, firstLinkHref); 
+                             }
+
+                        } else {
+                            navLinks.forEach(l => l.classList.remove('active-initial')); 
+                            setActiveSection(currentHash);
+                        }
+                    }
+
+                    window.addEventListener('hashchange', () => {
+                        navLinks.forEach(l => l.classList.remove('active-initial')); 
+                        setActiveSection(window.location.hash);
+                    });
+                    
+                    handleHashChange(); 
+                });
+            </script>
+        </main>
+    </div>
+</body>
+</html>
