@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash of Clans Birim Rehberi & Simülatör</title>
+    <style>
+        :root {
+            --primary-color: #1a2533;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --card-bg: #34495e;
+            --border-radius: 8px;
+            --padding: 15px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: var(--padding);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: var(--secondary-color);
+            padding: var(--padding);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        h1, h2 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button.active, .tab-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--accent-color);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            background-color: var(--secondary-color);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .unit-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .unit-filters select, .unit-filters input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        #unit-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--padding);
+        }
+
+        .unit-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--padding);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .unit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .unit-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            border: 2px solid var(--accent-color);
+            background-color: var(--secondary-color); /* Arkaplan rengi, resim yüklenene kadar veya hata durumunda */
+        }
+
+        .unit-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        .unit-card p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .unit-card p strong {
+            color: #bdc3c7;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: var(--secondary-color);
+            margin: 10% auto;
+            padding: 25px;
+            border: 1px solid var(--accent-color);
+            width: 80%;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+         .modal-content img {
+            display:block;
+            margin:0 auto 20px;
+            width:120px;
+            height:120px;
+            object-fit: contain;
+            border-radius:50%;
+            background-color: var(--secondary-color);
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover, .close-button:focus {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        /* Simülatör Stilleri (öncekiyle aynı) */
+        .simulator-section{display:flex;flex-direction:column;gap:20px;margin-bottom:20px}.team-selection{background-color:var(--card-bg);padding:var(--padding);border-radius:var(--border-radius)}.team-selection h3{margin-top:0;color:var(--accent-color)}.unit-selector{display:flex;align-items:center;gap:10px;margin-bottom:10px}.unit-selector select,.unit-selector input[type=number]{padding:8px;border-radius:4px;border:1px solid #555;background-color:var(--secondary-color);color:var(--text-color)}.unit-selector input[type=number]{width:60px}.unit-selector button{padding:8px 12px;background-color:var(--accent-color);color:var(--text-color);border:none;border-radius:4px;cursor:pointer}.selected-units-list{list-style:none;padding:0}.selected-units-list li{background-color:var(--secondary-color);padding:5px 10px;margin-bottom:5px;border-radius:4px;display:flex;justify-content:space-between}.selected-units-list li button{background:0 0;border:none;color:#c0392b;cursor:pointer;font-weight:700}#simulate-button{display:block;width:100%;padding:15px;background-color:var(--accent-color);color:var(--text-color);border:none;border-radius:var(--border-radius);font-size:1.2em;cursor:pointer;margin-top:20px;transition:background-color .3s}#simulate-button:hover{background-color:#c0392b}#simulation-result{background-color:var(--card-bg);padding:var(--padding);border-radius:var(--border-radius);margin-top:20px;min-height:100px}#simulation-result h3{color:var(--accent-color);margin-top:0}#simulation-log p{margin:3px 0;font-size:.9em;border-bottom:1px dashed #555;padding-bottom:3px}#simulation-log p:last-child{border-bottom:none}#simulation-log p.round-log{font-weight:700;color:var(--accent-color);margin-top:10px}
+        /* Mobil Uyum (öncekiyle aynı) */
+        @media (max-width:768px){.tabs{flex-direction:column}.tab-button{width:100%;margin-bottom:5px;border-radius:var(--border-radius)}.unit-filters{flex-direction:column}.unit-selector{flex-direction:column;align-items:stretch}.unit-selector input[type=number]{width:100%}.modal-content{width:95%;margin:5% auto}}@media (max-width:480px){#unit-list{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clash of Clans Birim Rehberi & Simülatör</h1>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'fihrist')">Birim Fihristi</button>
+            <button class="tab-button" onclick="openTab(event, 'simulator')">Savaş Simülatörü</button>
+        </div>
+
+        <div id="fihrist" class="tab-content active">
+            <h2>Birim Fihristi</h2>
+            <div class="unit-filters">
+                <input type="text" id="search-input" placeholder="Birim Adı Ara...">
+                <select id="type-filter">
+                    <option value="">Tüm Tipler</option>
+                    <option value="Troop">Asker</option>
+                    <option value="Spell">Büyü</option>
+                    <option value="Hero">Kahraman</option>
+                    <option value="Siege">Kuşatma Makinesi</option>
+                    <option value="Building">Bina</option>
+                </select>
+                <select id="target-filter">
+                    <option value="">Tüm Hedefler</option>
+                    <option value="Ground">Kara</option>
+                    <option value="Air">Hava</option>
+                    <option value="Ground & Air">Kara & Hava</option>
+                    <option value="Any">Herhangi</option>
+                </select>
+            </div>
+            <div id="unit-list">
+                <!-- Birim kartları buraya JS ile eklenecek -->
+            </div>
+        </div>
+
+        <div id="simulator" class="tab-content">
+            <h2>Savaş Simülatörü</h2>
+            <p style="text-align: center; font-style: italic;">Bu simülatör, birimlerin temel HP ve DPS değerlerine göre basitleştirilmiş bir sonuç sunar. Gerçek oyun mekaniklerini tam olarak yansıtmaz.</p>
+            
+            <div class="simulator-section">
+                <div class="team-selection">
+                    <h3>Saldıran Takım</h3>
+                    <div class="unit-selector">
+                        <select id="attacker-unit-select"></select>
+                        <input type="number" id="attacker-unit-count" value="1" min="1">
+                        <button onclick="addUnitToTeam('attacker')">Ekle</button>
+                    </div>
+                    <ul id="attacker-team-list" class="selected-units-list"></ul>
+                </div>
+
+                <div class="team-selection">
+                    <h3>Savunan Takım (Birimler/Yapılar)</h3>
+                     <div class="unit-selector">
+                        <select id="defender-unit-select"></select>
+                        <input type="number" id="defender-unit-count" value="1" min="1">
+                        <button onclick="addUnitToTeam('defender')">Ekle</button>
+                    </div>
+                    <ul id="defender-team-list" class="selected-units-list"></ul>
+                </div>
+            </div>
+
+            <button id="simulate-button" onclick="runSimulation()">SİMÜLASYONU BAŞLAT</button>
+
+            <div id="simulation-result">
+                <h3>Simülasyon Sonucu</h3>
+                <p id="winner-text"></p>
+                <div id="simulation-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="unitModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Fandom Wiki'den Alınan İKON URL'leri
+        // Bu URL'ler genellikle daha stabildir ve daha küçüktür.
+        // Örnek: https://static.wikia.nocookie.net/clashofclans/images/KOD/AD/DosyaAdi.png
+        // Not: "/revision/latest/scale-to-width-down/BOYUT?cb=TIMESTAMP" kısımlarını kaldırdım,
+        // böylece tarayıcı orijinal boyutu alır ve CSS ile boyutlandırırız.
+        const placeholderImageSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjI0cHgiIGZvbnQtZmFtaWx5PSJBcmlhbCI+8J+MsTwvdGV4dD48L3N2Zz4='; // Basit bir "resim yok" ikonu (🖼️)
+
+        const unitData = [
+            { 
+                id: 'barbarian', name: 'Barbar', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/f/f4/Barbarian_Icon.png',
+                level: 'Max', hp: 230, dps: 168, damageType: 'Tek Hedef', targets: 'Ground', housingSpace: 1, 
+                trainingTime: '1s', trainingCost: '150 İksir', movementSpeed: 16,
+                description: 'Korkusuz savaşçı, ilk saldırdığı şeyi yok edene kadar durmaz.'
+            },
+            { 
+                id: 'archer', name: 'Okçu', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/3/37/Archer_Icon.png',
+                level: 'Max', hp: 96, dps: 132, damageType: 'Tek Hedef', targets: 'Ground & Air', housingSpace: 1, 
+                trainingTime: '2s', trainingCost: '300 İksir', movementSpeed: 24,
+                description: 'Menzilli saldırılarıyla duvarların üzerinden bile düşmanları avlar.'
+            },
+            { 
+                id: 'giant', name: 'Dev', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/a/ab/Giant_Icon.png',
+                level: 'Max', hp: 2200, dps: 152, damageType: 'Tek Hedef', targets: 'Ground (Savunmalar)', housingSpace: 5, 
+                trainingTime: '10s', trainingCost: '2250 İksir', movementSpeed: 12,
+                description: 'Yavaş ama dayanıklı, savunma binalarını hedef alır.'
+            },
+            { 
+                id: 'goblin', name: 'Goblin', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/1/12/Goblin_Icon.png',
+                level: 'Max', hp: 131, dps: 198, damageType: 'Tek Hedef (Kaynaklara x2)', targets: 'Ground', housingSpace: 1, 
+                trainingTime: '1s', trainingCost: '150 İksir', movementSpeed: 32,
+                description: 'Hızlı ve açgözlü, kaynak binalarına koşar.'
+            },
+            { 
+                id: 'wizard', name: 'Büyücü', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/4/49/Wizard_Icon.png',
+                level: 'Max', hp: 360, dps: 510, damageType: 'Alan Etkili', targets: 'Ground & Air', housingSpace: 4, 
+                trainingTime: '15s', trainingCost: '3000 İksir', movementSpeed: 16,
+                description: 'Güçlü alan etkili büyüleriyle tehdit oluşturur.'
+            },
+            { 
+                id: 'dragon', name: 'Ejderha', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/6/6d/Dragon_Icon.png',
+                level: 'Max', hp: 4900, dps: 370, damageType: 'Alan Etkili', targets: 'Ground & Air', housingSpace: 20, 
+                trainingTime: '3m', trainingCost: '25000 İksir', movementSpeed: 16,
+                description: 'Uçan bir kabus, ateş püskürerek geniş alanlara hasar verir.'
+            },
+            {
+                id: 'pekka', name: 'P.E.K.K.A', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/c/c7/P.E.K.K.A_Icon.png',
+                level: 'Max', hp: 7700, dps: 1200, damageType: 'Tek Hedef', targets: 'Ground', housingSpace: 25,
+                trainingTime: '3m', trainingCost: '30000 İksir', movementSpeed: 16,
+                description: 'Ağır zırhlı, yüksek hasarlı bir samuray. Tesla kulelerine karşı zayıftır.'
+            },
+            {
+                id: 'lightning_spell', name: 'Yıldırım Büyüsü', type: 'Spell', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/d/d9/Lightning_Spell_Icon.png',
+                level: 'Max', damage: '560x6', targets: 'Any', housingSpace: 1, 
+                trainingTime: '3m', trainingCost: '10000 İksir',
+                description: 'Belirli bir alana yıldırımlar düşürerek hasar verir ve kısa süreli sersemletir.'
+            },
+            {
+                id: 'archer_queen', name: 'Okçu Kraliçe', type: 'Hero', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/6/65/Archer_Queen_Icon.png',
+                level: 'Max', hp: 3430, dps: 725, damageType: 'Tek Hedef', targets: 'Ground & Air', housingSpace: 'Hero',
+                trainingTime: 'Yok (Yenilenme)', trainingCost: 'Kara İksir', movementSpeed: 24, ability: 'Kraliyet Pelerini',
+                description: 'Güçlü menzilli saldırıları ve görünmezlik yeteneği olan kahraman.'
+            },
+            {
+                id: 'wall_wrecker', name: 'Duvar Yıkıcı', type: 'Siege', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/c/c1/Wall_Wrecker_Icon.png',
+                level: 'Max', hp: 7000, dps: '500 (duvarlara x40)', damageType: 'Alan Etkili', targets: 'Ground (Belediye Binası)', housingSpace: 1,
+                trainingTime: '20m', trainingCost: '100000 Altın', movementSpeed: 10,
+                description: 'Doğrudan Belediye Binasına ilerler, yolundaki duvarları yıkar ve Klan Kalesi birliklerini taşır.'
+            },
+            { 
+                id: 'cannon', name: 'Top', type: 'Building', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/7/7c/Cannon_Icon.png', 
+                level: 'Max', hp: 2010, dps: 204, damageType: 'Tek Hedef', targets: 'Ground', 
+                description: 'Temel kara savunması.'
+            },
+            { 
+                id: 'archer_tower', name: 'Okçu Kulesi', type: 'Building', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/c/ce/Archer_Tower_Icon.png',
+                level: 'Max', hp: 1780, dps: 220, damageType: 'Tek Hedef', targets: 'Ground & Air',
+                description: 'Hem kara hem hava birimlerine saldırabilen çok yönlü savunma.'
+            },
+            { 
+                id: 'inferno_tower_single', name: 'Cehennem Kulesi (Tekli)', type: 'Building', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/9/99/Inferno_Tower_Icon.png', // Genel Inferno ikonu, modunu belirtiriz
+                level: 'Max', hp: 3700, dps: '240-2800 (Artan)', damageType: 'Tek Hedef (Artan)', targets: 'Ground & Air',
+                description: 'Tek bir hedefe zamanla artan hasar verir. Yüksek canlı birimlere karşı etkilidir.'
+            },
+            { 
+                id: 'balloon', name: 'Balon', type: 'Troop', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/1/1c/Balloon_Icon.png',
+                level: 'Max', hp: 980, dps: 360, damageType: 'Alan Etkili (Öldüğünde de)', targets: 'Ground (Savunmalar)', housingSpace: 5, 
+                trainingTime: '20s', trainingCost: '3500 İksir', movementSpeed: 10,
+                description: 'Yavaş hareket eden hava birimi, savunmaları hedef alır ve yok edildiğinde de hasar verir.'
+            },
+            {
+                id: 'barbarian_king', name: 'Barbar Kral', type: 'Hero', 
+                image: 'https://static.wikia.nocookie.net/clashofclans/images/7/79/Barbarian_King_Icon.png',
+                level: 'Max', hp: 10200, dps: 581, damageType: 'Tek Hedef', targets: 'Ground', housingSpace: 'Hero',
+                trainingTime: 'Yok (Yenilenme)', trainingCost: 'Kara İksir', movementSpeed: 16, ability: 'Demir Yumruk',
+                description: 'Güçlü yakın dövüş kahramanı. Yeteneğiyle Barbarları çağırır ve kendini güçlendirir.'
+            }
+        ];
+
+        // FİHRİST BÖLÜMÜ
+        const unitList = document.getElementById('unit-list');
+        const searchInput = document.getElementById('search-input');
+        const typeFilter = document.getElementById('type-filter');
+        const targetFilter = document.getElementById('target-filter');
+        const modal = document.getElementById('unitModal');
+        const modalBody = document.getElementById('modal-body');
+
+        function renderUnitCard(unit) {
+            const card = document.createElement('div');
+            card.className = 'unit-card';
+            // onerror ile resim yüklenemezse placeholder göster
+            card.innerHTML = `
+                <img src="${unit.image}" alt="${unit.name}" onerror="this.onerror=null; this.src='${placeholderImageSVG}';">
+                <h3>${unit.name} ${unit.level ? `(Sv. ${unit.level})` : ''}</h3>
+                <p><strong>Tip:</strong> ${unit.type}</p>
+                ${unit.hp ? `<p><strong>Can:</strong> ${unit.hp}</p>` : ''}
+                ${unit.dps ? `<p><strong>SPS (DPS):</strong> ${unit.dps}</p>` : ''}
+                ${unit.damage ? `<p><strong>Hasar:</strong> ${unit.damage}</p>` : ''}
+                ${unit.damageType ? `<p><strong>Hasar Tipi:</strong> ${unit.damageType}</p>` : ''}
+                <p><strong>Hedefler:</strong> ${unit.targets}</p>
+                ${unit.housingSpace ? `<p><strong>Yer:</strong> ${unit.housingSpace}</p>` : ''}
+            `;
+            card.onclick = () => showUnitDetails(unit);
+            return card;
+        }
+
+        function displayUnits(unitsToDisplay) {
+            unitList.innerHTML = '';
+            if (unitsToDisplay.length === 0) {
+                unitList.innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Filtreyle eşleşen birim bulunamadı.</p>';
+            } else {
+                unitsToDisplay.forEach(unit => {
+                    unitList.appendChild(renderUnitCard(unit));
+                });
+            }
+        }
+
+        function filterUnits() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedType = typeFilter.value;
+            const selectedTarget = targetFilter.value;
+
+            const filteredUnits = unitData.filter(unit => {
+                const nameMatch = unit.name.toLowerCase().includes(searchTerm);
+                const typeMatch = selectedType ? unit.type === selectedType : true;
+                
+                let targetMatch = true;
+                if (selectedTarget) {
+                    if (selectedTarget === "Any") {
+                        targetMatch = unit.targets === "Any";
+                    } else if (selectedTarget === "Ground & Air") {
+                        targetMatch = unit.targets === "Ground & Air";
+                    } else { 
+                        targetMatch = unit.targets && unit.targets.includes(selectedTarget);
+                    }
+                }
+                return nameMatch && typeMatch && targetMatch;
+            });
+            displayUnits(filteredUnits);
+        }
+        
+        searchInput.addEventListener('input', filterUnits);
+        typeFilter.addEventListener('change', filterUnits);
+        targetFilter.addEventListener('change', filterUnits);
+
+        function showUnitDetails(unit) {
+            modalBody.innerHTML = `
+                <img src="${unit.image}" alt="${unit.name}" style="display:block; margin:0 auto 20px; width:120px; height:120px; border-radius:50%; object-fit: contain;" onerror="this.onerror=null; this.src='${placeholderImageSVG}';">
+                <h2>${unit.name} ${unit.level ? `(Seviye ${unit.level})` : ''}</h2>
+                <p><strong>Tip:</strong> ${unit.type}</p>
+                ${unit.hp ? `<p><strong>Can Puanı (HP):</strong> ${unit.hp}</p>` : ''}
+                ${unit.dps ? `<p><strong>Saniye Başına Hasar (DPS):</strong> ${unit.dps}</p>` : ''}
+                ${unit.damage ? `<p><strong>Hasar:</strong> ${unit.damage}</p>` : ''}
+                ${unit.damageType ? `<p><strong>Hasar Tipi:</strong> ${unit.damageType}</p>` : ''}
+                <p><strong>Hedef Türü:</strong> ${unit.targets}</p>
+                ${unit.housingSpace ? `<p><strong>Kullanılan Yer:</strong> ${unit.housingSpace}</p>` : ''}
+                ${unit.trainingTime ? `<p><strong>Eğitim Süresi:</strong> ${unit.trainingTime}</p>` : ''}
+                ${unit.trainingCost ? `<p><strong>Eğitim Maliyeti:</strong> ${unit.trainingCost}</p>` : ''}
+                ${unit.movementSpeed ? `<p><strong>Hareket Hızı:</strong> ${unit.movementSpeed}</p>` : ''}
+                ${unit.ability ? `<p><strong>Özel Yetenek:</strong> ${unit.ability}</p>` : ''}
+                ${unit.description ? `<p><strong>Açıklama:</strong> ${unit.description}</p>` : ''}
+            `;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // SİMÜLATÖR BÖLÜMÜ (Önceki cevapla aynı, burada tekrar etmiyorum, ama yukarıdaki gibi olacak)
+        const attackerUnitSelect = document.getElementById('attacker-unit-select');
+        const defenderUnitSelect = document.getElementById('defender-unit-select');
+        const attackerTeamList = document.getElementById('attacker-team-list');
+        const defenderTeamList = document.getElementById('defender-team-list');
+        const simulationResultText = document.getElementById('winner-text');
+        const simulationLogDiv = document.getElementById('simulation-log');
+
+        let attackerTeam = [];
+        let defenderTeam = [];
+
+        function populateUnitSelectors() {
+            const simulatableUnits = unitData.filter(u => u.type === 'Building' || (u.hp && u.dps)); 
+            
+            attackerUnitSelect.innerHTML = '';
+            defenderUnitSelect.innerHTML = '';
+
+            const attackerTypes = ['Troop', 'Hero', 'Siege'];
+            const defenderTypes = ['Troop', 'Hero', 'Building'];
+
+            unitData.forEach(unit => {
+                if (attackerTypes.includes(unit.type) && unit.hp && unit.dps) {
+                    const optionAttacker = document.createElement('option');
+                    optionAttacker.value = unit.id;
+                    optionAttacker.textContent = unit.name;
+                    attackerUnitSelect.appendChild(optionAttacker);
+                }
+                if (defenderTypes.includes(unit.type) && unit.hp && (getUnitDps(unit) > 0 || unit.type === 'Building')) { 
+                    const optionDefender = document.createElement('option');
+                    optionDefender.value = unit.id;
+                    optionDefender.textContent = unit.name;
+                    defenderUnitSelect.appendChild(optionDefender);
+                }
+            });
+        }
+
+        function addUnitToTeam(teamType) {
+            const selectElement = teamType === 'attacker' ? attackerUnitSelect : defenderUnitSelect;
+            const countElement = teamType === 'attacker' ? document.getElementById('attacker-unit-count') : document.getElementById('defender-unit-count');
+            const team = teamType === 'attacker' ? attackerTeam : defenderTeam;
+
+            const unitId = selectElement.value;
+            const unitCount = parseInt(countElement.value);
+            const unitTemplate = unitData.find(u => u.id === unitId);
+
+            if (unitTemplate && unitCount > 0) {
+                for (let i = 0; i < unitCount; i++) {
+                    team.push({ 
+                        ...unitTemplate, 
+                        currentHp: unitTemplate.hp, 
+                        originalId: `${unitTemplate.id}_${team.length}_${Date.now()}_${Math.random().toString(36).substring(7)}` 
+                    });
+                }
+                renderTeamList(teamType);
+            }
+        }
+        
+        function removeUnitFromTeam(teamType, unitOriginalIdToRemove) {
+            let team = teamType === 'attacker' ? attackerTeam : defenderTeam;
+            const indexToRemove = team.findIndex(u => u.originalId === unitOriginalIdToRemove);
+            if (indexToRemove > -1) {
+                team.splice(indexToRemove, 1);
+            }
+            renderTeamList(teamType);
+        }
+
+        function renderTeamList(teamType) {
+            const teamListElement = teamType === 'attacker' ? attackerTeamList : defenderTeamList;
+            const team = teamType === 'attacker' ? attackerTeam : defenderTeam;
+            
+            teamListElement.innerHTML = '';
+
+            const unitGroups = team.reduce((acc, unit) => {
+                if (!acc[unit.id]) {
+                    acc[unit.id] = { name: unit.name, count: 0, originalIds: [] };
+                }
+                acc[unit.id].count++;
+                acc[unit.id].originalIds.push(unit.originalId);
+                return acc;
+            }, {});
+
+            for (const id in unitGroups) {
+                const group = unitGroups[id];
+                const li = document.createElement('li');
+                li.textContent = `${group.name} x${group.count}`;
+                
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'X';
+                // Son ekleneni silmek için grubun son originalId'sini kullan
+                removeButton.onclick = () => removeUnitFromTeam(teamType, group.originalIds[group.originalIds.length - 1]); 
+                li.appendChild(removeButton);
+                teamListElement.appendChild(li);
+            }
+        }
+        
+        function getUnitDps(unit) {
+            if (unit.type === 'Building' && !unit.dps) return 0;
+            if (typeof unit.dps === 'string') {
+                if (unit.dps.includes('-')) { 
+                    return parseInt(unit.dps.split('-')[0]); 
+                } else if (unit.dps.includes('(')) { 
+                    return parseInt(unit.dps.split(' ')[0]);
+                }
+                const parsedDps = parseInt(unit.dps);
+                return isNaN(parsedDps) ? 0 : parsedDps;
+            }
+            return unit.dps || 0;
+        }
+
+        function runSimulation() {
+            simulationLogDiv.innerHTML = '';
+            simulationResultText.textContent = '';
+
+            if (attackerTeam.length === 0 || defenderTeam.length === 0) {
+                simulationResultText.textContent = 'Lütfen her iki takıma da birim ekleyin.';
+                return;
+            }
+            
+            let currentAttackers = attackerTeam.map(u => ({ ...u, currentHp: u.hp }));
+            let currentDefenders = defenderTeam.map(u => ({ ...u, currentHp: u.hp }));
+            
+            let log = [];
+            let round = 0;
+            const MAX_ROUNDS = 200; 
+
+            log.push(`<p><strong>Savaş Başladı!</strong></p>`);
+            log.push(`<p>Saldıranlar (${currentAttackers.length} birim): ${currentAttackers.map(u => u.name).join(', ') || 'Yok'}</p>`);
+            log.push(`<p>Savunanlar (${currentDefenders.length} birim/yapı): ${currentDefenders.map(u => u.name).join(', ') || 'Yok'}</p>`);
+
+            while (currentAttackers.length > 0 && currentDefenders.length > 0 && round < MAX_ROUNDS) {
+                round++;
+                log.push(`<p class="round-log">--- Tur ${round} ---</p>`);
+
+                // Saldıranların Saldırısı
+                currentAttackers.forEach(attacker => {
+                    if (currentDefenders.length === 0) return;
+                    const attackerDps = getUnitDps(attacker);
+                    if (attackerDps > 0) {
+                        const targetDefender = currentDefenders[0]; 
+                        targetDefender.currentHp -= attackerDps;
+                        log.push(`<p>${attacker.name} (${Math.round(attacker.currentHp)} HP) -> ${targetDefender.name}'e ${attackerDps} hasar verdi. ${targetDefender.name} kalan HP: ${Math.max(0, Math.round(targetDefender.currentHp))}</p>`);
+                        if (targetDefender.currentHp <= 0) {
+                            log.push(`<p><strong>${targetDefender.name} yenildi!</strong></p>`);
+                            currentDefenders.shift(); 
+                        }
+                    }
+                });
+
+                if (currentDefenders.length === 0) break; 
+
+                // Savunanların Saldırısı
+                currentDefenders.forEach(defender => {
+                    if (currentAttackers.length === 0) return;
+                    const defenderDps = getUnitDps(defender);
+                     if (defenderDps > 0) { 
+                        const targetAttacker = currentAttackers[0]; 
+                        targetAttacker.currentHp -= defenderDps;
+                        log.push(`<p>${defender.name} (${Math.round(defender.currentHp)} HP) -> ${targetAttacker.name}'e ${defenderDps} hasar verdi. ${targetAttacker.name} kalan HP: ${Math.max(0, Math.round(targetAttacker.currentHp))}</p>`);
+                        if (targetAttacker.currentHp <= 0) {
+                            log.push(`<p><strong>${targetAttacker.name} yenildi!</strong></p>`);
+                            currentAttackers.shift();
+                        }
+                    }
+                });
+                
+                 if (round >= MAX_ROUNDS) {
+                    log.push("<p><strong>UYARI:</strong> Maksimum tur sayısına ulaşıldı. Simülasyon durduruldu.</p>");
+                }
+            }
+
+            if (currentAttackers.length > 0 && currentDefenders.length === 0) {
+                simulationResultText.textContent = 'Saldıranlar Kazandı!';
+                log.push(`<p><strong>Saldıranlar kazandı! Kalan birimler: ${currentAttackers.length} (${currentAttackers.map(u=>u.name).join(', ')})</strong></p>`);
+            } else if (currentDefenders.length > 0 && currentAttackers.length === 0) {
+                simulationResultText.textContent = 'Savunanlar Kazandı!';
+                log.push(`<p><strong>Savunanlar kazandı! Kalan birimler/yapılar: ${currentDefenders.length} (${currentDefenders.map(u=>u.name).join(', ')})</strong></p>`);
+            } else if (round >= MAX_ROUNDS){
+                 simulationResultText.textContent = 'Berabere (Maksimum Tur)';
+                 log.push("<p><strong>Sonuç: Berabere (Maksimum Tur Sayısına Ulaşıldı).</strong></p>");
+            }
+            else { 
+                simulationResultText.textContent = 'Berabere veya Belirsiz!';
+                log.push("<p><strong>Sonuç: Berabere veya tüm birimler aynı anda yok edildi.</strong></p>");
+            }
+            simulationLogDiv.innerHTML = log.join('');
+        }
+
+
+        // TAB KONTROLÜ
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Başlangıç
+        displayUnits(unitData);
+        populateUnitSelectors();
+        if (document.getElementsByClassName('tab-button').length > 0) {
+            document.getElementsByClassName('tab-button')[0].click(); // İlk tabı aktif yap
+        }
+    </script>
+</body>
+</html>
